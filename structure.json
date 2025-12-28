@@ -1,0 +1,2424 @@
+{
+  "01_unix": {
+    "1_account_management": [
+      {
+        "code": "U-01",
+        "title": "root 계정 원격 접속 제한",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-01.md"
+      },
+      {
+        "code": "U-02",
+        "title": "비밀번호 관리정책 설정",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-02.md"
+      },
+      {
+        "code": "U-03",
+        "title": "계정 잠금 임계값 설정",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-03.md"
+      },
+      {
+        "code": "U-04",
+        "title": "비밀번호 파일 보호",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-04.md"
+      },
+      {
+        "code": "U-05",
+        "title": "root 이외의 UID가 ‘0’ 금지",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-05.md"
+      },
+      {
+        "code": "U-06",
+        "title": "사용자 계정 su 기능 제한",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-06.md"
+      },
+      {
+        "code": "U-07",
+        "title": "불필요한 계정 제거",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-07.md"
+      },
+      {
+        "code": "U-08",
+        "title": "관리자 그룹에 최소한의 계정 포함",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-08.md"
+      },
+      {
+        "code": "U-09",
+        "title": "계정이 존재하지 않는 GID 금지",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-09.md"
+      },
+      {
+        "code": "U-10",
+        "title": "동일한 UID 금지",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-10.md"
+      },
+      {
+        "code": "U-11",
+        "title": "사용자 shell 점검",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-11.md"
+      },
+      {
+        "code": "U-12",
+        "title": "세션 종료 시간 설정",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-12.md"
+      },
+      {
+        "code": "U-13",
+        "title": "안전한 비밀번호 암호화 알고리즘 사용",
+        "korean_category": "UNIX > 1. 계정 관리",
+        "filename": "u-13.md"
+      }
+    ],
+    "2_file_directory_management": [
+      {
+        "code": "U-14",
+        "title": "root 홈, 패스 디렉터리 권한 및 패스 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-14.md"
+      },
+      {
+        "code": "U-15",
+        "title": "파일 및 디렉터리 소유자 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-15.md"
+      },
+      {
+        "code": "U-16",
+        "title": "/etc/passwd 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-16.md"
+      },
+      {
+        "code": "U-17",
+        "title": "시스템 시작 스크립트 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-17.md"
+      },
+      {
+        "code": "U-18",
+        "title": "/etc/shadow 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-18.md"
+      },
+      {
+        "code": "U-19",
+        "title": "/etc/hosts 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-19.md"
+      },
+      {
+        "code": "U-20",
+        "title": "/etc/(x)inetd.conf 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-20.md"
+      },
+      {
+        "code": "U-21",
+        "title": "/etc/(r)syslog.conf 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-21.md"
+      },
+      {
+        "code": "U-22",
+        "title": "/etc/services 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-22.md"
+      },
+      {
+        "code": "U-23",
+        "title": "SUID, SGID, Sticky bit 설정 파일 점검",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-23.md"
+      },
+      {
+        "code": "U-24",
+        "title": "사용자, 시스템 환경변수 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-24.md"
+      },
+      {
+        "code": "U-25",
+        "title": "world writable 파일 점검",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-25.md"
+      },
+      {
+        "code": "U-26",
+        "title": "/dev에 존재하지 않는 device 파일 점검",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-26.md"
+      },
+      {
+        "code": "U-27",
+        "title": "$HOME/.rhosts, hosts.equiv 사용 금지",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-27.md"
+      },
+      {
+        "code": "U-28",
+        "title": "접속 IP 및 포트 제한",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-28.md"
+      },
+      {
+        "code": "U-29",
+        "title": "hosts.lpd 파일 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-29.md"
+      },
+      {
+        "code": "U-30",
+        "title": "UMASK 설정 관리",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-30.md"
+      },
+      {
+        "code": "U-31",
+        "title": "홈디렉토리 소유자 및 권한 설정",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-31.md"
+      },
+      {
+        "code": "U-32",
+        "title": "홈 디렉토리로 지정한 디렉토리의 존재 관리",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-32.md"
+      },
+      {
+        "code": "U-33",
+        "title": "숨겨진 파일 및 디렉토리 검색 및 제거",
+        "korean_category": "UNIX > 2. 파일 및 디렉토리 관리",
+        "filename": "u-33.md"
+      }
+    ],
+    "3_service_management": [
+      {
+        "code": "U-34",
+        "title": "Finger 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-34.md"
+      },
+      {
+        "code": "U-35",
+        "title": "공유 서비스에 대한 익명 접근 제한 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-35.md"
+      },
+      {
+        "code": "U-36",
+        "title": "r 계열 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-36.md"
+      },
+      {
+        "code": "U-37",
+        "title": "crontab 설정파일 권한 설정 미흡",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-37.md"
+      },
+      {
+        "code": "U-38",
+        "title": "DoS 공격에 취약한 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-38.md"
+      },
+      {
+        "code": "U-39",
+        "title": "불필요한 NFS 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-39.md"
+      },
+      {
+        "code": "U-40",
+        "title": "NFS 접근 통제",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-40.md"
+      },
+      {
+        "code": "U-41",
+        "title": "불필요한 automountd 제거",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-41.md"
+      },
+      {
+        "code": "U-42",
+        "title": "불필요한 RPC 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-42.md"
+      },
+      {
+        "code": "U-43",
+        "title": "NIS, NIS+ 점검",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-43.md"
+      },
+      {
+        "code": "U-44",
+        "title": "tftp, talk 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-44.md"
+      },
+      {
+        "code": "U-45",
+        "title": "메일 서비스 버전 점검",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-45.md"
+      },
+      {
+        "code": "U-46",
+        "title": "일반 사용자의 메일 서비스 실행 방지",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-46.md"
+      },
+      {
+        "code": "U-47",
+        "title": "스팸 메일 릴레이 제한",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-47.md"
+      },
+      {
+        "code": "U-48",
+        "title": "expn, vrfy 명령어 제한",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-48.md"
+      },
+      {
+        "code": "U-49",
+        "title": "DNS 보안 버전 패치",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-49.md"
+      },
+      {
+        "code": "U-50",
+        "title": "DNS ZoneTransfer 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-50.md"
+      },
+      {
+        "code": "U-51",
+        "title": "DNS 서비스의 취약한 동적 업데이트 설정 금지",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-51.md"
+      },
+      {
+        "code": "U-52",
+        "title": "Telnet 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-52.md"
+      },
+      {
+        "code": "U-53",
+        "title": "FTP 서비스 정보 노출 제한",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-53.md"
+      },
+      {
+        "code": "U-54",
+        "title": "암호화되지 않는 FTP 서비스 비활성화",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-54.md"
+      },
+      {
+        "code": "U-55",
+        "title": "FTP 계정 shell 제한",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-55.md"
+      },
+      {
+        "code": "U-56",
+        "title": "FTP 서비스 접근 제어 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-56.md"
+      },
+      {
+        "code": "U-57",
+        "title": "Ftpusers 파일 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-57.md"
+      },
+      {
+        "code": "U-58",
+        "title": "불필요한 SNMP 서비스 구동 점검",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-58.md"
+      },
+      {
+        "code": "U-59",
+        "title": "안전한 SNMP 버전 사용",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-59.md"
+      },
+      {
+        "code": "U-60",
+        "title": "SNMP Community String 복잡성 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-60.md"
+      },
+      {
+        "code": "U-61",
+        "title": "SNMP Access Control 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-61.md"
+      },
+      {
+        "code": "U-62",
+        "title": "로그인 시 경고 메시지 설정",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-62.md"
+      },
+      {
+        "code": "U-63",
+        "title": "sudo 명령어 접근 관리",
+        "korean_category": "UNIX > 3. 서비스 관리",
+        "filename": "u-63.md"
+      }
+    ],
+    "4_patch_management": [
+      {
+        "code": "U-64",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "UNIX > 4. 패치 관리",
+        "filename": "u-64.md"
+      }
+    ],
+    "5_log_management": [
+      {
+        "code": "U-65",
+        "title": "NTP 및 시각 동기화 설정",
+        "korean_category": "UNIX > 5. 로그 관리",
+        "filename": "u-65.md"
+      },
+      {
+        "code": "U-66",
+        "title": "정책에 따른 시스템 로깅 설정",
+        "korean_category": "UNIX > 5. 로그 관리",
+        "filename": "u-66.md"
+      },
+      {
+        "code": "U-67",
+        "title": "로그 디렉터리 소유자 및 권한 설정",
+        "korean_category": "UNIX > 5. 로그 관리",
+        "filename": "u-67.md"
+      }
+    ]
+  },
+  "02_windows": {
+    "1_account_management": [
+      {
+        "code": "W-01",
+        "title": "Administrator 계정 이름 변경 등 보안성 강화",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-01.md"
+      },
+      {
+        "code": "W-02",
+        "title": "Guest 계정 비활성화",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-02.md"
+      },
+      {
+        "code": "W-03",
+        "title": "불필요한 계정 제거",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-03.md"
+      },
+      {
+        "code": "W-04",
+        "title": "계정 잠금 임계값 설정",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-04.md"
+      },
+      {
+        "code": "W-05",
+        "title": "해독 가능한 암호화를 사용하여 암호 저장 해제",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-05.md"
+      },
+      {
+        "code": "W-06",
+        "title": "관리자 그룹에 최소한의 사용자 포함",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-06.md"
+      },
+      {
+        "code": "W-07",
+        "title": "Everyone 사용 권한을 익명 사용자에 적용",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-07.md"
+      },
+      {
+        "code": "W-08",
+        "title": "계정 잠금 기간 설정",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-08.md"
+      },
+      {
+        "code": "W-09",
+        "title": "비밀번호 관리 정책 설정",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-09.md"
+      },
+      {
+        "code": "W-10",
+        "title": "마지막 사용자 이름 표시 안 함",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-10.md"
+      },
+      {
+        "code": "W-11",
+        "title": "로컬 로그온 허용",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-11.md"
+      },
+      {
+        "code": "W-12",
+        "title": "익명 SID/이름 변환 허용 해제",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-12.md"
+      },
+      {
+        "code": "W-13",
+        "title": "콘솔 로그온 시 로컬 계정에서 빈 암호 사용 제한",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-13.md"
+      },
+      {
+        "code": "W-14",
+        "title": "원격터미널 접속 가능한 사용자 그룹 제한",
+        "korean_category": "Windows 서버 > 1. 계정 관리",
+        "filename": "w-14.md"
+      }
+    ],
+    "2_service_management": [
+      {
+        "code": "W-15",
+        "title": "사용자 개인키 사용 시 암호 입력",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-15.md"
+      },
+      {
+        "code": "W-16",
+        "title": "공유 권한 및 사용자 그룹 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-16.md"
+      },
+      {
+        "code": "W-17",
+        "title": "하드디스크 기본 공유 제거",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-17.md"
+      },
+      {
+        "code": "W-18",
+        "title": "불필요한 서비스 제거",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-18.md"
+      },
+      {
+        "code": "W-19",
+        "title": "불필요한 IIS 서비스 구동 점검",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-19.md"
+      },
+      {
+        "code": "W-20",
+        "title": "NetBIOS 바인딩 서비스 구동 점검",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-20.md"
+      },
+      {
+        "code": "W-21",
+        "title": "암호화되지 않는 FTP 서비스 비활성화",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-21.md"
+      },
+      {
+        "code": "W-22",
+        "title": "FTP 디렉토리 접근권한 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-22.md"
+      },
+      {
+        "code": "W-23",
+        "title": "공유 서비스에 대한 익명 접근 제한 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-23.md"
+      },
+      {
+        "code": "W-24",
+        "title": "FTP 접근 제어 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-24.md"
+      },
+      {
+        "code": "W-25",
+        "title": "DNS Zone Transfer 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-25.md"
+      },
+      {
+        "code": "W-26",
+        "title": "RDS(Remote Data Services)제거",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-26.md"
+      },
+      {
+        "code": "W-27",
+        "title": "최신 Windows OS Build 버전 적용",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-27.md"
+      },
+      {
+        "code": "W-28",
+        "title": "터미널 서비스 암호화 수준 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-28.md"
+      },
+      {
+        "code": "W-29",
+        "title": "불필요한 SNMP 서비스 구동 점검",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-29.md"
+      },
+      {
+        "code": "W-30",
+        "title": "SNMP Community String 복잡성 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-30.md"
+      },
+      {
+        "code": "W-31",
+        "title": "SNMP Access Control 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-31.md"
+      },
+      {
+        "code": "W-32",
+        "title": "DNS 서비스 구동 점검",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-32.md"
+      },
+      {
+        "code": "W-33",
+        "title": "HTTP/FTP/SMTP 배너 차단",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-33.md"
+      },
+      {
+        "code": "W-34",
+        "title": "Telnet 서비스 비활성화",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-34.md"
+      },
+      {
+        "code": "W-35",
+        "title": "불필요한 ODBC/OLE-DB 데이터 소스와 드라이브 제거",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-35.md"
+      },
+      {
+        "code": "W-36",
+        "title": "원격터미널 접속 타임아웃 설정",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-36.md"
+      },
+      {
+        "code": "W-37",
+        "title": "예약된 작업에 의심스러운 명령이 등록되어 있는지 점검",
+        "korean_category": "Windows 서버 > 2. 서비스 관리",
+        "filename": "w-37.md"
+      }
+    ],
+    "3_patch_management": [
+      {
+        "code": "W-38",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "Windows 서버 > 3. 패치 관리",
+        "filename": "w-38.md"
+      },
+      {
+        "code": "W-39",
+        "title": "백신 프로그램 업데이트",
+        "korean_category": "Windows 서버 > 3. 패치 관리",
+        "filename": "w-39.md"
+      }
+    ],
+    "4_log_management": [
+      {
+        "code": "W-40",
+        "title": "정책에 따른 시스템 로깅 설정",
+        "korean_category": "Windows 서버 > 4. 로그 관리",
+        "filename": "w-40.md"
+      },
+      {
+        "code": "W-41",
+        "title": "NTP 및 시각 동기화 설정",
+        "korean_category": "Windows 서버 > 4. 로그 관리",
+        "filename": "w-41.md"
+      },
+      {
+        "code": "W-42",
+        "title": "이벤트 로그 관리 설정",
+        "korean_category": "Windows 서버 > 4. 로그 관리",
+        "filename": "w-42.md"
+      },
+      {
+        "code": "W-43",
+        "title": "이벤트 로그 파일 접근 통제 설정",
+        "korean_category": "Windows 서버 > 4. 로그 관리",
+        "filename": "w-43.md"
+      }
+    ],
+    "5_security_management": [
+      {
+        "code": "W-44",
+        "title": "원격으로 액세스할 수 있는 레지스트리 경로",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-44.md"
+      },
+      {
+        "code": "W-45",
+        "title": "백신 프로그램 설치",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-45.md"
+      },
+      {
+        "code": "W-46",
+        "title": "SAM 파일 접근 통제 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-46.md"
+      },
+      {
+        "code": "W-47",
+        "title": "화면 보호기 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-47.md"
+      },
+      {
+        "code": "W-48",
+        "title": "로그온하지 않고 시스템 종료 허용",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-48.md"
+      },
+      {
+        "code": "W-49",
+        "title": "원격 시스템에서 강제로 시스템 종료",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-49.md"
+      },
+      {
+        "code": "W-50",
+        "title": "W-50",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-50.md"
+      },
+      {
+        "code": "W-51",
+        "title": "SAM 계정과 공유의 익명 열거 허용 안 함",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-51.md"
+      },
+      {
+        "code": "W-52",
+        "title": "Autologon 기능 제어",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-52.md"
+      },
+      {
+        "code": "W-53",
+        "title": "이동식 미디어 포맷 및 꺼내기 허용",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-53.md"
+      },
+      {
+        "code": "W-54",
+        "title": "Dos 공격 방어 레지스트리 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-54.md"
+      },
+      {
+        "code": "W-55",
+        "title": "사용자가 프린터 드라이버를 설치할 수 없게 함",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-55.md"
+      },
+      {
+        "code": "W-56",
+        "title": "SMB 세션 중단 관리 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-56.md"
+      },
+      {
+        "code": "W-57",
+        "title": "로그온 시 경고 메시지 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-57.md"
+      },
+      {
+        "code": "W-58",
+        "title": "사용자별 홈 디렉터리 권한 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-58.md"
+      },
+      {
+        "code": "W-59",
+        "title": "LAN Manager 인증 수준",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-59.md"
+      },
+      {
+        "code": "W-60",
+        "title": "W-60",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-60.md"
+      },
+      {
+        "code": "W-61",
+        "title": "파일 및 디렉토리 보호",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-61.md"
+      },
+      {
+        "code": "W-62",
+        "title": "시작 프로그램 목록 분석",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-62.md"
+      },
+      {
+        "code": "W-63",
+        "title": "도메인 컨트롤러-사용자의 시간 동기화",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-63.md"
+      },
+      {
+        "code": "W-64",
+        "title": "윈도우 방화벽 설정",
+        "korean_category": "Windows 서버 > 5. 보안 관리",
+        "filename": "w-64.md"
+      }
+    ]
+  },
+  "03_web": {
+    "1_account_management": [
+      {
+        "code": "WEB-01",
+        "title": "Default 관리자 계정명 변경",
+        "korean_category": "웹 서비스 > 1. 계정 관리",
+        "filename": "web-01.md"
+      },
+      {
+        "code": "WEB-02",
+        "title": "취약한 비밀번호 사용 제한",
+        "korean_category": "웹 서비스 > 1. 계정 관리",
+        "filename": "web-02.md"
+      },
+      {
+        "code": "WEB-03",
+        "title": "비밀번호 파일 권한 관리",
+        "korean_category": "웹 서비스 > 1. 계정 관리",
+        "filename": "web-03.md"
+      }
+    ],
+    "2_service_management": [
+      {
+        "code": "WEB-04",
+        "title": "웹 서비스 디렉터리 리스팅 방지 설정",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-04.md"
+      },
+      {
+        "code": "WEB-05",
+        "title": "지정하지 않은 CGI/ISAPI 실행 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-05.md"
+      },
+      {
+        "code": "WEB-06",
+        "title": "웹 서비스 상위 디렉터리 접근 제한 설정",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-06.md"
+      },
+      {
+        "code": "WEB-07",
+        "title": "웹 서비스 경로 내 불필요한 파일 제거",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-07.md"
+      },
+      {
+        "code": "WEB-08",
+        "title": "웹 서비스 파일 업로드 및 다운로드 용량 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-08.md"
+      },
+      {
+        "code": "WEB-09",
+        "title": "웹 서비스 프로세스 권한 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-09.md"
+      },
+      {
+        "code": "WEB-10",
+        "title": "불필요한 프록시 설정 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-10.md"
+      },
+      {
+        "code": "WEB-11",
+        "title": "웹 서비스 경로 설정",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-11.md"
+      },
+      {
+        "code": "WEB-12",
+        "title": "웹 서비스 링크 사용 금지",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-12.md"
+      },
+      {
+        "code": "WEB-13",
+        "title": "웹 서비스 설정 파일 노출 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-13.md"
+      },
+      {
+        "code": "WEB-14",
+        "title": "웹 서비스 경로 내 파일의 접근 통제",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-14.md"
+      },
+      {
+        "code": "WEB-15",
+        "title": "웹 서비스의 불필요한 스크립트 매핑 제거",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-15.md"
+      },
+      {
+        "code": "WEB-16",
+        "title": "웹 서비스 헤더 정보 노출 제한",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-16.md"
+      },
+      {
+        "code": "WEB-17",
+        "title": "웹 서비스 가상 디렉로리 삭제",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-17.md"
+      },
+      {
+        "code": "WEB-18",
+        "title": "웹 서비스 WebDAV 비활성화",
+        "korean_category": "웹 서비스 > 2. 서비스 관리",
+        "filename": "web-18.md"
+      }
+    ],
+    "3_security_config": [
+      {
+        "code": "WEB-19",
+        "title": "웹 서비스 SSI(Server Side Includes) 사용 제한",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-19.md"
+      },
+      {
+        "code": "WEB-20",
+        "title": "SSL/TLS 활성화",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-20.md"
+      },
+      {
+        "code": "WEB-21",
+        "title": "HTTP 리디렉션",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-21.md"
+      },
+      {
+        "code": "WEB-22",
+        "title": "에러 페이지 관리",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-22.md"
+      },
+      {
+        "code": "WEB-23",
+        "title": "LDAP 알고리즘 적절하게 구성",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-23.md"
+      },
+      {
+        "code": "WEB-24",
+        "title": "별도의 업로드 경로 사용 및 권한 설정",
+        "korean_category": "웹 서비스 > 3. 보안 설정",
+        "filename": "web-24.md"
+      }
+    ],
+    "4_patch_log_management": [
+      {
+        "code": "WEB-25",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "웹 서비스 > 4. 패치 및 로그 관리",
+        "filename": "web-25.md"
+      },
+      {
+        "code": "WEB-26",
+        "title": "로그 디렉터리 및 파일 권한 설정",
+        "korean_category": "웹 서비스 > 4. 패치 및 로그 관리",
+        "filename": "web-26.md"
+      }
+    ]
+  },
+  "04_security": {
+    "1_account_management": [
+      {
+        "code": "S-01",
+        "title": "S-01",
+        "korean_category": "보안 장비 > 1. 계정 관리",
+        "filename": "s-01.md"
+      },
+      {
+        "code": "S-02",
+        "title": "비밀번호 관리정책 설정",
+        "korean_category": "보안 장비 > 1. 계정 관리",
+        "filename": "s-02.md"
+      },
+      {
+        "code": "S-03",
+        "title": "S-03",
+        "korean_category": "보안 장비 > 1. 계정 관리",
+        "filename": "s-03.md"
+      },
+      {
+        "code": "S-04",
+        "title": "S-04",
+        "korean_category": "보안 장비 > 1. 계정 관리",
+        "filename": "s-04.md"
+      },
+      {
+        "code": "S-05",
+        "title": "계정 잠금 임계값 설정",
+        "korean_category": "보안 장비 > 1. 계정 관리",
+        "filename": "s-05.md"
+      }
+    ],
+    "2_access_management": [
+      {
+        "code": "S-06",
+        "title": "S-06",
+        "korean_category": "보안 장비 > 2. 접근 관리",
+        "filename": "s-06.md"
+      },
+      {
+        "code": "S-07",
+        "title": "S-07",
+        "korean_category": "보안 장비 > 2. 접근 관리",
+        "filename": "s-07.md"
+      },
+      {
+        "code": "S-08",
+        "title": "세션 종료 시간 설정",
+        "korean_category": "보안 장비 > 2. 접근 관리",
+        "filename": "s-08.md"
+      }
+    ],
+    "3_patch_management": [
+      {
+        "code": "S-09",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "보안 장비 > 3. 패치 관리",
+        "filename": "s-09.md"
+      }
+    ],
+    "4_log_management": [
+      {
+        "code": "S-10",
+        "title": "S-10",
+        "korean_category": "보안 장비 > 4. 로그 관리",
+        "filename": "s-10.md"
+      },
+      {
+        "code": "S-11",
+        "title": "S-11",
+        "korean_category": "보안 장비 > 4. 로그 관리",
+        "filename": "s-11.md"
+      },
+      {
+        "code": "S-12",
+        "title": "S-12",
+        "korean_category": "보안 장비 > 4. 로그 관리",
+        "filename": "s-12.md"
+      },
+      {
+        "code": "S-13",
+        "title": "원격 로그 서버 사용",
+        "korean_category": "보안 장비 > 4. 로그 관리",
+        "filename": "s-13.md"
+      },
+      {
+        "code": "S-14",
+        "title": "NTP 및 시각 동기화 설정",
+        "korean_category": "보안 장비 > 4. 로그 관리",
+        "filename": "s-14.md"
+      }
+    ],
+    "5_function_management": [
+      {
+        "code": "S-15",
+        "title": "정책 관리",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-15.md"
+      },
+      {
+        "code": "S-16",
+        "title": "NAT 설정",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-16.md"
+      },
+      {
+        "code": "S-17",
+        "title": "DMZ 설정",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-17.md"
+      },
+      {
+        "code": "S-18",
+        "title": "최소한의 서비스만 제공",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-18.md"
+      },
+      {
+        "code": "S-19",
+        "title": "이상징후 탐지 모니터링 수행",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-19.md"
+      },
+      {
+        "code": "S-20",
+        "title": "장비 사용량 검토",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-20.md"
+      },
+      {
+        "code": "S-21",
+        "title": "SNMP 서비스 확인",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-21.md"
+      },
+      {
+        "code": "S-22",
+        "title": "SNMP Community String 복잡성 설정",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-22.md"
+      },
+      {
+        "code": "S-23",
+        "title": "유해 트래픽 탐지/차단 정책 설정",
+        "korean_category": "보안 장비 > 5. 기능 관리",
+        "filename": "s-23.md"
+      }
+    ]
+  },
+  "05_network": {
+    "1_account_management": [
+      {
+        "code": "N-01",
+        "title": "비밀번호 설정",
+        "korean_category": "네트워크 장비 > 1. 계정 관리",
+        "filename": "n-01.md"
+      },
+      {
+        "code": "N-02",
+        "title": "비밀번호 복잡성 설정",
+        "korean_category": "네트워크 장비 > 1. 계정 관리",
+        "filename": "n-02.md"
+      },
+      {
+        "code": "N-03",
+        "title": "암호화된 비밀번호 사용",
+        "korean_category": "네트워크 장비 > 1. 계정 관리",
+        "filename": "n-03.md"
+      },
+      {
+        "code": "N-04",
+        "title": "계정 잠금 임계값 설정",
+        "korean_category": "네트워크 장비 > 1. 계정 관리",
+        "filename": "n-04.md"
+      },
+      {
+        "code": "N-05",
+        "title": "사용자·명령어별 권한 설정",
+        "korean_category": "네트워크 장비 > 1. 계정 관리",
+        "filename": "n-05.md"
+      }
+    ],
+    "2_access_management": [
+      {
+        "code": "N-06",
+        "title": "VTY 접근(ACL) 설정",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-06.md"
+      },
+      {
+        "code": "N-07",
+        "title": "Session Timeout 설정",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-07.md"
+      },
+      {
+        "code": "N-08",
+        "title": "VTY 접속 시 안전한 프로토콜 사용",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-08.md"
+      },
+      {
+        "code": "N-09",
+        "title": "불필요한 보조 입출력 포트 사용 금지",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-09.md"
+      },
+      {
+        "code": "N-10",
+        "title": "로그인 시 경고 메시지 설정",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-10.md"
+      },
+      {
+        "code": "N-11",
+        "title": "원격로그 서버 사용",
+        "korean_category": "네트워크 장비 > 2. 접근 관리",
+        "filename": "n-11.md"
+      }
+    ],
+    "3_patch_management": [
+      {
+        "code": "N-12",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "네트워크 장비 > 3. 패치 관리",
+        "filename": "n-12.md"
+      }
+    ],
+    "4_log_management": [
+      {
+        "code": "N-13",
+        "title": "로깅 버퍼 크기 설정",
+        "korean_category": "네트워크 장비 > 4. 로그 관리",
+        "filename": "n-13.md"
+      },
+      {
+        "code": "N-14",
+        "title": "정책에 따른 로깅 설정",
+        "korean_category": "네트워크 장비 > 4. 로그 관리",
+        "filename": "n-14.md"
+      },
+      {
+        "code": "N-15",
+        "title": "NTP 및 시각 동기화 설정",
+        "korean_category": "네트워크 장비 > 4. 로그 관리",
+        "filename": "n-15.md"
+      },
+      {
+        "code": "N-16",
+        "title": "Timestamp 로그 설정",
+        "korean_category": "네트워크 장비 > 4. 로그 관리",
+        "filename": "n-16.md"
+      }
+    ],
+    "5_function_management": [
+      {
+        "code": "N-17",
+        "title": "SNMP 서비스 확인",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-17.md"
+      },
+      {
+        "code": "N-18",
+        "title": "SNMP Community String 복잡성 설정",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-18.md"
+      },
+      {
+        "code": "N-19",
+        "title": "SNMP ACL 설정",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-19.md"
+      },
+      {
+        "code": "N-20",
+        "title": "SNMP Community 권한 설정",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-20.md"
+      },
+      {
+        "code": "N-21",
+        "title": "TFTP 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-21.md"
+      },
+      {
+        "code": "N-22",
+        "title": "Spoofing 방지 필터링 적용",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-22.md"
+      },
+      {
+        "code": "N-23",
+        "title": "DDoS 공격 방어 설정 또는 DDoS 장비 사용",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-23.md"
+      },
+      {
+        "code": "N-24",
+        "title": "사용하지 않는 인터페이스 비활성화",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-24.md"
+      },
+      {
+        "code": "N-25",
+        "title": "TCP Keepalive 서비스 설정",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-25.md"
+      },
+      {
+        "code": "N-26",
+        "title": "Finger 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-26.md"
+      },
+      {
+        "code": "N-27",
+        "title": "웹 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-27.md"
+      },
+      {
+        "code": "N-28",
+        "title": "TCP/UDP small 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-28.md"
+      },
+      {
+        "code": "N-29",
+        "title": "Bootp 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-29.md"
+      },
+      {
+        "code": "N-30",
+        "title": "CDP 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-30.md"
+      },
+      {
+        "code": "N-31",
+        "title": "Directed-broadcast 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-31.md"
+      },
+      {
+        "code": "N-32",
+        "title": "Source Routing 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-32.md"
+      },
+      {
+        "code": "N-33",
+        "title": "Proxy ARP 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-33.md"
+      },
+      {
+        "code": "N-34",
+        "title": "ICMP unreachable, redirect 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-34.md"
+      },
+      {
+        "code": "N-35",
+        "title": "identd 서비스 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-35.md"
+      },
+      {
+        "code": "N-36",
+        "title": "Domain Lookup 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-36.md"
+      },
+      {
+        "code": "N-37",
+        "title": "pad 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-37.md"
+      },
+      {
+        "code": "N-38",
+        "title": "mask-reply 차단",
+        "korean_category": "네트워크 장비 > 5. 기능 관리",
+        "filename": "n-38.md"
+      }
+    ]
+  },
+  "06_control": {
+    "1_account_management": [
+      {
+        "code": "C-01",
+        "title": "계정 기능이 있는 제어시스템 구성요소에 대해 계정을 안전하게 설정하여 사용",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-01.md"
+      },
+      {
+        "code": "C-02",
+        "title": "제어시스템 계정의 로그인/로그아웃, 사용 명령 등 사용기록을 저장",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-02.md"
+      },
+      {
+        "code": "C-03",
+        "title": "제어시스템 계정입력 시 비밀번호 마스킹 처리, 입력값 에러 발생 시 제공 정보 제한 수행",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-03.md"
+      },
+      {
+        "code": "C-04",
+        "title": "제어시스템 계정을 관리, 운영, 유지보수 등 용도에 따라 분리하고 운용",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-04.md"
+      },
+      {
+        "code": "C-05",
+        "title": "제어시스템 계정에 대해 관리, 운영, 유지보수 등 용도에 맞는 최소 권한 부여",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-05.md"
+      },
+      {
+        "code": "C-06",
+        "title": "제어시스템 운전원별 유일 계정 부여 또는 시간별 사용자 기록 유지",
+        "korean_category": "제어시스템 > 1. 계정 관리",
+        "filename": "c-06.md"
+      }
+    ],
+    "2_service_management": [
+      {
+        "code": "C-07",
+        "title": "제어시스템 구성요소에 대한 시각 동기화 수행",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-07.md"
+      },
+      {
+        "code": "C-08",
+        "title": "제어시스템에 불필요한 서비스 및 취약한 서비스 제거 또는 보완대책 수행",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-08.md"
+      },
+      {
+        "code": "C-09",
+        "title": "제어시스템 구성요소에 대한 관리자 페이지 운영 시 이에 대한 접근통제(사전인가 접근만 허용) 수행",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-09.md"
+      },
+      {
+        "code": "C-10",
+        "title": "제어시스템 내 파일/디렉터리 접근 권한 및 신뢰 관계를 적절히 부여",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-10.md"
+      },
+      {
+        "code": "C-11",
+        "title": "제어시스템 내 제어와 직접적인 관련이 없는 불필요 프로그램 삭제",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-11.md"
+      },
+      {
+        "code": "C-12",
+        "title": "제어시스템 운영 정보, 제어 명령 등 중요 정보에 대한 위변조 및 replay 공격 방지 대책 적용",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-12.md"
+      },
+      {
+        "code": "C-13",
+        "title": "제어시스템 내 전달되는 제어 명령 및 파라미터의 정상 범위를 식별하고 관리",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-13.md"
+      },
+      {
+        "code": "C-14",
+        "title": "제어시스템 내 사용자 통신 세션에 대해 세션 타임아웃 적용",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-14.md"
+      },
+      {
+        "code": "C-15",
+        "title": "GPS 스푸핑/재밍 공격 등 시간 동기화 서비스를 교란하기 위한 공격에 대비한 보안 조치 수행",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-15.md"
+      },
+      {
+        "code": "C-16",
+        "title": "제어시스템에 대한 최신 업데이트, 보안패치를 안전하게 적용하기 위한 제조사 협력방안, 테스트 방안",
+        "korean_category": "제어시스템 > 2. 서비스 관리",
+        "filename": "c-16.md"
+      }
+    ],
+    "3_patch_management": [
+      {
+        "code": "C-17",
+        "title": "외부 업체, 인터넷을 통한 다운로드 등의 경로로 반입된 각종 패치·업데이트 파일에 대해 무결성 검증",
+        "korean_category": "제어시스템 > 3. 패치 관리",
+        "filename": "c-17.md"
+      },
+      {
+        "code": "C-18",
+        "title": "제어시스템 구성요소의 알려진 취약점에 대해 보안패치 적용 또는 상응하는 대응책 적용",
+        "korean_category": "제어시스템 > 3. 패치 관리",
+        "filename": "c-18.md"
+      },
+      {
+        "code": "C-19",
+        "title": "운영체제, 응용프로그램, 펌웨어 등에 대한 안정성이 확인된 최신 버전의 소프트웨어 사용 및",
+        "korean_category": "제어시스템 > 3. 패치 관리",
+        "filename": "c-19.md"
+      },
+      {
+        "code": "C-20",
+        "title": "제어시스템 개선, 신규 시스템 도입, 패치 및 수정 시, 안전성을 테스트하기 위한 테스트베드 또는",
+        "korean_category": "제어시스템 > 3. 패치 관리",
+        "filename": "c-20.md"
+      }
+    ],
+    "4_network_access_control": [
+      {
+        "code": "C-21",
+        "title": "제어 네트워크는 업무망, 인터넷, CCTV 망 등 외부망과 물리적으로 분리하여 사용",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-21.md"
+      },
+      {
+        "code": "C-22",
+        "title": "제어 네트워크 외부로 자료전달 시 물리적 일방향 자료전달 환경을 구축하여 외부에서 제어",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-22.md"
+      },
+      {
+        "code": "C-23",
+        "title": "제어 네트워크에 무선인터넷, 테더링, 외부 유선망 등의 외부망 연결을 제한하고 주기적으로 점검",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-23.md"
+      },
+      {
+        "code": "C-24",
+        "title": "제어 네트워크에 비인가된 시스템/기기에 대한 연결 및 접속을 차단",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-24.md"
+      },
+      {
+        "code": "C-25",
+        "title": "물리적 일방향 자료전달 환경의 올바른 동작 및 운용에 대한 주기적인 점검 수행",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-25.md"
+      },
+      {
+        "code": "C-26",
+        "title": "제어 네트워크를 용도에 따라 세분화하고, 접근제어를 수행하여 제어시스템 운영에 필요한 네트워크,",
+        "korean_category": "제어시스템 > 4. 네트워크 접근통제",
+        "filename": "c-26.md"
+      }
+    ],
+    "5_physical_access_control": [
+      {
+        "code": "C-27",
+        "title": "제어시스템에 대해 네트워크 포트, USB 포트 등 외부 연결 접점에 대해 허가받은 사항을 제외하고 모두",
+        "korean_category": "제어시스템 > 5. 물리적 접근 통제",
+        "filename": "c-27.md"
+      },
+      {
+        "code": "C-28",
+        "title": "제어시스템 구성요소를 물리적으로 보호할 수 있는 조치 적용(잠금장치가 있는 함체, 랙, 수납 책상 등)",
+        "korean_category": "제어시스템 > 5. 물리적 접근 통제",
+        "filename": "c-28.md"
+      }
+    ],
+    "6_threat_detection": [
+      {
+        "code": "C-29",
+        "title": "백신 프로그램 설치가 가능한 제어시스템 구성요소에 대해 악성코드 감염 및 차단을 위한 백신 프로그램 설치",
+        "korean_category": "제어시스템 > 6. 보안위협 탐지",
+        "filename": "c-29.md"
+      },
+      {
+        "code": "C-30",
+        "title": "이상 트래픽 발생 탐지 등 제어시스템 내의 보안 관리를 위해 적합한 침입탐지시스템 등을 구축 및",
+        "korean_category": "제어시스템 > 6. 보안위협 탐지",
+        "filename": "c-30.md"
+      }
+    ],
+    "7_recovery_response": [
+      {
+        "code": "C-31",
+        "title": "제어시스템 대상 사이버 위기대응 매뉴얼을 수립",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-31.md"
+      },
+      {
+        "code": "C-32",
+        "title": "제어시스템 대상 사이버 위기대응 훈련을 정기적으로 시행",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-32.md"
+      },
+      {
+        "code": "C-33",
+        "title": "제어시스템 침해사고 대응을 위한 제어시스템 설정, 중요 데이터 등을 백업 및 관리",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-33.md"
+      },
+      {
+        "code": "C-34",
+        "title": "제어시스템의 장애 발생, 사이버 공격, 물리적 테러 등에 대한 비상계획 수립",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-34.md"
+      },
+      {
+        "code": "C-35",
+        "title": "제어시스템의 장애 발생, 사이버 공격, 물리적 테러 등에 대한 비상계획 훈련을 정기적으로 시행",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-35.md"
+      },
+      {
+        "code": "C-36",
+        "title": "제어시스템 조작 불능에 대비하여 수작업 운전 매뉴얼 작성 및 교육 훈련 시행",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-36.md"
+      },
+      {
+        "code": "C-37",
+        "title": "제어시스템의 각종 이벤트에 대한 로그를 관리하기 위한 중앙집중식 로그관리 수행",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-37.md"
+      },
+      {
+        "code": "C-38",
+        "title": "제어시스템 구성요소의 기준 형상을 설정하고 변경 및 업데이트 시 형상관리 수행",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-38.md"
+      },
+      {
+        "code": "C-40",
+        "title": "제어시스템 보호를 위한 화재탐지 설비 및 화재 진압설비를 구비",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-40.md"
+      },
+      {
+        "code": "C-41",
+        "title": "제어시스템 보호를 위한 누수탐지 설비 및 침수 대응 장비 구비",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-41.md"
+      },
+      {
+        "code": "C-42",
+        "title": "제어시스템에 대하여 정기적으로 사이버 위험 시나리오를 식별하고, 완화방안 수립",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-42.md"
+      },
+      {
+        "code": "C-39",
+        "title": "제어시스템 주요 장비 및 제어 네트워크 장비에 대해 이중화",
+        "korean_category": "제어시스템 > 7. 복구 대응",
+        "filename": "c-39.md"
+      }
+    ],
+    "8_security_management": [
+      {
+        "code": "C-43",
+        "title": "제어시스템 구성요소에 대한 자산정보(담당자, 제조사, 모델명, 펌웨어 버전, 설치 SW 등)를 항상",
+        "korean_category": "제어시스템 > 8. 보안 관리",
+        "filename": "c-43.md"
+      },
+      {
+        "code": "C-45",
+        "title": "제어시스템에서 USB 등 이동형 저장 매체를 사용해야 하는 경우, 사전 정의된 정책에 따라 사용",
+        "korean_category": "제어시스템 > 8. 보안 관리",
+        "filename": "c-45.md"
+      },
+      {
+        "code": "C-49",
+        "title": "제어시스템 유지보수를 위한 전용 장비(노트북 등)를 마련하고 관련 정책을 시행",
+        "korean_category": "제어시스템 > 8. 보안 관리",
+        "filename": "c-49.md"
+      },
+      {
+        "code": "C-50",
+        "title": "허가에 의한 로직 변경 정책 수립",
+        "korean_category": "제어시스템 > 8. 보안 관리",
+        "filename": "c-50.md"
+      }
+    ],
+    "8_recovery_response": [
+      {
+        "code": "C-44",
+        "title": "제어시스템 중요 구성요소가 설치된 장소를 보호구역으로 설정",
+        "korean_category": "제어시스템 > 8. 복구 대응",
+        "filename": "c-44.md"
+      },
+      {
+        "code": "C-46",
+        "title": "제어 네트워크에 연결되는 외부 정보통신기기 반‧출입 시 클린존 통과, 관리대장 작성 등 관리절차 마련",
+        "korean_category": "제어시스템 > 8. 복구 대응",
+        "filename": "c-46.md"
+      },
+      {
+        "code": "C-47",
+        "title": "제어시스템의 특성을 반영한 정보보안 정책, 지침을 수립",
+        "korean_category": "제어시스템 > 8. 복구 대응",
+        "filename": "c-47.md"
+      },
+      {
+        "code": "C-48",
+        "title": "제어시스템 운영 업무에 대해 표준업무 절차서를 작성하고 적용",
+        "korean_category": "제어시스템 > 8. 복구 대응",
+        "filename": "c-48.md"
+      }
+    ],
+    "9_training": [
+      {
+        "code": "C-51",
+        "title": "제어시스템 운전원, 관리자, 유지보수인력, 보안 인력에 대해 직무별 직무교육을 정기적으로 실시",
+        "korean_category": "제어시스템 > 9. 교육훈련",
+        "filename": "c-51.md"
+      }
+    ]
+  },
+  "07_pc": {
+    "1_account_management": [
+      {
+        "code": "PC-01",
+        "title": "비밀번호의 주기적 변경",
+        "korean_category": "PC > 1. 계정 관리",
+        "filename": "pc-01.md"
+      },
+      {
+        "code": "PC-02",
+        "title": "비밀번호 관리정책 설정",
+        "korean_category": "PC > 1. 계정 관리",
+        "filename": "pc-02.md"
+      },
+      {
+        "code": "PC-03",
+        "title": "복구 콘솔에서 자동 로그온을 금지하도록 설정",
+        "korean_category": "PC > 1. 계정관리",
+        "filename": "pc-03.md"
+      }
+    ],
+    "2_service_management": [
+      {
+        "code": "PC-04",
+        "title": "공유 폴더 제거",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-04.md"
+      },
+      {
+        "code": "PC-05",
+        "title": "항목의 불필요한 서비스 제거",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-05.md"
+      },
+      {
+        "code": "PC-06",
+        "title": "비인가 상용 메신저 사용 금지",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-06.md"
+      },
+      {
+        "code": "PC-07",
+        "title": "파일 시스템이 NTFS 포맷으로 설정",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-07.md"
+      },
+      {
+        "code": "PC-08",
+        "title": "PC-08",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-08.md"
+      },
+      {
+        "code": "PC-09",
+        "title": "브라우저 종료 시 임시 인터넷 파일 폴더의 내용을 삭제하도록 설정",
+        "korean_category": "PC > 2. 서비스 관리",
+        "filename": "pc-09.md"
+      }
+    ],
+    "3_patch_management": [
+      {
+        "code": "PC-10",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "PC > 3. 패치 관리",
+        "filename": "pc-10.md"
+      },
+      {
+        "code": "PC-11",
+        "title": "지원이 종료되지 않은 Windows OS Build 적용",
+        "korean_category": "PC > 3. 패치 관리",
+        "filename": "pc-11.md"
+      }
+    ],
+    "4_security_management": [
+      {
+        "code": "PC-12",
+        "title": "Windows 자동 로그인 점검",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-12.md"
+      },
+      {
+        "code": "PC-13",
+        "title": "바이러스 백신 프로그램 설치 및 주기적 업데이트",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-13.md"
+      },
+      {
+        "code": "PC-14",
+        "title": "바이러스 백신 프로그램에서 제공하는 실시간 감시 기능 활성화",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-14.md"
+      },
+      {
+        "code": "PC-15",
+        "title": "OS에서 제공하는 침입차단 기능 활성화",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-15.md"
+      },
+      {
+        "code": "PC-16",
+        "title": "화면보호기 대기 시간 설정 및 재시작 시 암호 보호 설정",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-16.md"
+      },
+      {
+        "code": "PC-17",
+        "title": "CD, DVD, USB 메모리 등과 같은 미디어의 자동 실행 방지 등 이동식 미디어에 대한 보안대책 수립",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-17.md"
+      },
+      {
+        "code": "PC-18",
+        "title": "원격 지원을 금지하도록 정책이 설정",
+        "korean_category": "PC > 4. 보안 관리",
+        "filename": "pc-18.md"
+      }
+    ]
+  },
+  "08_dbms": {
+    "1_account_management": [
+      {
+        "code": "D-01",
+        "title": "기본 계정의 비밀번호, 정책 등을 변경하여 사용",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-01.md"
+      },
+      {
+        "code": "D-02",
+        "title": "데이터베이스의 불필요 계정을 제거하거나, 잠금설정 후 사용",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-02.md"
+      },
+      {
+        "code": "D-03",
+        "title": "비밀번호 사용 기간 및 복잡도를 기관의 정책에 맞도록 설정",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-03.md"
+      },
+      {
+        "code": "D-04",
+        "title": "데이터베이스 관리자 권한을 꼭 필요한 계정 및 그룹에 대해서만 허용",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-04.md"
+      },
+      {
+        "code": "D-05",
+        "title": "비밀번호 재사용에 대한 제약 설정",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-05.md"
+      },
+      {
+        "code": "D-06",
+        "title": "DB 사용자 계정을 개별적으로 부여하여 사용",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-06.md"
+      },
+      {
+        "code": "D-07",
+        "title": "root 권한으로 서비스 구동 제한",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-07.md"
+      },
+      {
+        "code": "D-08",
+        "title": "안전한 암호화 알고리즘 사용",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-08.md"
+      },
+      {
+        "code": "D-09",
+        "title": "일정 횟수의 로그인 실패 시 이에 대한 잠금정책 설정",
+        "korean_category": "DBMS > 1. 계정 관리",
+        "filename": "d-09.md"
+      }
+    ],
+    "2_access_management": [
+      {
+        "code": "D-10",
+        "title": "원격에서 DB 서버로의 접속 제한",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-10.md"
+      },
+      {
+        "code": "D-11",
+        "title": "DBA 이외의 인가되지 않은 사용자가 시스템 테이블에 접근할 수 없도록 설정",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-11.md"
+      },
+      {
+        "code": "D-12",
+        "title": "안전한 리스너 비밀번호 설정 및 사용",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-12.md"
+      },
+      {
+        "code": "D-13",
+        "title": "불필요한 ODBC/OLE-DB 데이터 소스와 드라이브를 제거하여 사용",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-13.md"
+      },
+      {
+        "code": "D-14",
+        "title": "데이터베이스의 주요 설정 파일, 비밀번호 파일 등과 같은 주요 파일들의 접근 권한이 적절하게 설정",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-14.md"
+      },
+      {
+        "code": "D-15",
+        "title": "관리자 이외의 사용자가 오라클 리스너의 접속을 통해 리스너 로그 및 trace 파일에 대한 변경 제한",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-15.md"
+      },
+      {
+        "code": "D-16",
+        "title": "Windows 인증 모드 사용",
+        "korean_category": "DBMS > 2. 접근 관리",
+        "filename": "d-16.md"
+      }
+    ],
+    "3_option_management": [
+      {
+        "code": "D-17",
+        "title": "Audit Table은 데이터베이스 관리자 계정으로 접근하도록 제한",
+        "korean_category": "DBMS > 3.옵션 관리",
+        "filename": "d-17.md"
+      },
+      {
+        "code": "D-18",
+        "title": "응용프로그램 또는 DBA 계정의 Role이 Public으로 설정되지 않도록 조정",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-18.md"
+      },
+      {
+        "code": "D-19",
+        "title": "OS_ROLES, REMOTE_OS_AUTHENTICATION, REMOTE_OS_ROLES를 FALSE로 설정",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-19.md"
+      },
+      {
+        "code": "D-20",
+        "title": "인가되지 않은 Object Owner의 제한",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-20.md"
+      },
+      {
+        "code": "D-21",
+        "title": "인가되지 않은 GRANT OPTION 사용 제한",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-21.md"
+      },
+      {
+        "code": "D-22",
+        "title": "데이터베이스의 자원 제한 기능을 TRUE로 설정",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-22.md"
+      },
+      {
+        "code": "D-23",
+        "title": "xp_cmdshell 사용 제한",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-23.md"
+      },
+      {
+        "code": "D-24",
+        "title": "Registry Procedure 권한 제한",
+        "korean_category": "DBMS > 3. 옵션 관리",
+        "filename": "d-24.md"
+      }
+    ],
+    "4_patch_management": [
+      {
+        "code": "D-25",
+        "title": "주기적 보안 패치 및 벤더 권고 사항 적용",
+        "korean_category": "DBMS > 4. 패치 관리",
+        "filename": "d-25.md"
+      },
+      {
+        "code": "D-26",
+        "title": "데이터베이스의 접근, 변경, 삭제 등의 감사 기록이 기관의 감사 기록 정책에 적합하도록 설정",
+        "korean_category": "DBMS > 4. 패치 관리",
+        "filename": "d-26.md"
+      }
+    ]
+  },
+  "09_mobile": {
+    "1_operation_management": [
+      {
+        "code": "M-01",
+        "title": "이동통신망 엣지 네트워크 운영 시 인터넷 연결 등을 고려한 보안기술을 적용",
+        "korean_category": "이동통신> 1. 운영 관리",
+        "filename": "m-01.md"
+      },
+      {
+        "code": "M-02",
+        "title": "이동통신망에서 가상화 기술 적용 시 계정 관리, 이상징후 탐지 등 보안 설정 또는 기술 적용",
+        "korean_category": "이동통신> 1. 운영 관리",
+        "filename": "m-02.md"
+      },
+      {
+        "code": "M-03",
+        "title": "이동통신망 장비 및 SW 제조사 등과 보안 정책을 마련하여 운영",
+        "korean_category": "이동통신> 1. 운영 관리",
+        "filename": "m-03.md"
+      },
+      {
+        "code": "M-04",
+        "title": "이동통신망 장비 구축과 네트워크 설계 시 보안 내재화를 수행",
+        "korean_category": "이동통신> 1. 운영 관리",
+        "filename": "m-04.md"
+      }
+    ]
+  },
+  "11_virtualization": {
+    "1_account_management": [
+      {
+        "code": "HV-01",
+        "title": "계정 로그오프/세션 관리",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-01.md"
+      },
+      {
+        "code": "HV-02",
+        "title": "가상화 장비 외부접속 차단",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-02.md"
+      },
+      {
+        "code": "HV-03",
+        "title": "가상화 장비 루트계정 관리",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-03.md"
+      },
+      {
+        "code": "HV-04",
+        "title": "가상화 장비 계정 권한 관리",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-04.md"
+      },
+      {
+        "code": "HV-05",
+        "title": "가상화 장비 사용자 인증 강화",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-05.md"
+      },
+      {
+        "code": "HV-06",
+        "title": "비밀번호 관리정책 설정",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-06.md"
+      },
+      {
+        "code": "HV-07",
+        "title": "계정 잠금 임계값 설정",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-07.md"
+      },
+      {
+        "code": "HV-09",
+        "title": "가상화 시스템 비밀번호 변경주기 설정",
+        "korean_category": "가상화 장비 > 1. 계정 관리",
+        "filename": "hv-09.md"
+      }
+    ],
+    "2_system_service_management": [
+      {
+        "code": "HV-08",
+        "title": "시스템 사용 주의사항 출력 설정",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-08.md"
+      },
+      {
+        "code": "HV-10",
+        "title": "SNMP Community String 복잡성 적용",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-10.md"
+      },
+      {
+        "code": "HV-11",
+        "title": "MOB(Managed Object Browser) 서비스 비활성화",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-11.md"
+      },
+      {
+        "code": "HV-12",
+        "title": "ESXi Shell 비활성화",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-12.md"
+      },
+      {
+        "code": "HV-13",
+        "title": "ESXi Shell 세션 종료 시간 설정",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-13.md"
+      },
+      {
+        "code": "HV-14",
+        "title": "원격 로그 서버 이용",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-14.md"
+      },
+      {
+        "code": "HV-15",
+        "title": "시스템 주요 이벤트 로그 설정",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-15.md"
+      },
+      {
+        "code": "HV-16",
+        "title": "비휘발성 경로 내 로그 파일 저장",
+        "korean_category": "가상화 장비 > 2. 시스템 서비스 관리",
+        "filename": "hv-16.md"
+      }
+    ],
+    "3_vm_management": [
+      {
+        "code": "HV-17",
+        "title": "코어덤프 수집 기능 활성화",
+        "korean_category": "가상화 장비 > 3. 가상머신 관리",
+        "filename": "hv-17.md"
+      },
+      {
+        "code": "HV-18",
+        "title": "가상머신의 장치 변경 제한 설정",
+        "korean_category": "가상화 장비 > 3. 가상머신 관리",
+        "filename": "hv-18.md"
+      },
+      {
+        "code": "HV-19",
+        "title": "가상 머신의 불필요한 장치 제거",
+        "korean_category": "가상화 장비 > 3. 가상머신 관리",
+        "filename": "hv-19.md"
+      },
+      {
+        "code": "HV-20",
+        "title": "가상머신 콘솔 클립보드 복사&붙여넣기 기능 비활성화",
+        "korean_category": "가상화 장비 > 3. 가상머신 관리",
+        "filename": "hv-20.md"
+      },
+      {
+        "code": "HV-21",
+        "title": "가상머신 콘솔 드래그 앤 드롭 기능 비활성화",
+        "korean_category": "가상화 장비 > 3. 가상 머신 관리",
+        "filename": "hv-21.md"
+      }
+    ],
+    "4_virtual_network_management": [
+      {
+        "code": "HV-22",
+        "title": "가상스위치 MAC 주소 변경 정책 비활성화",
+        "korean_category": "가상화 장비 > 4. 가상 네트워크 관리",
+        "filename": "hv-22.md"
+      },
+      {
+        "code": "HV-23",
+        "title": "가상스위치 무차별(Promiscuous) 모드 정책 비활성화",
+        "korean_category": "가상화 장비 > 4. 가상 네트워크 관리",
+        "filename": "hv-23.md"
+      },
+      {
+        "code": "HV-24",
+        "title": "가상스위치 위조전송(Forged Transmits) 모드 정책 비활성화",
+        "korean_category": "가상화 장비 > 4. 가상 네트워크 관리",
+        "filename": "hv-24.md"
+      },
+      {
+        "code": "HV-25",
+        "title": "주기적 보안 패치 및 벤더 권고사항 적용",
+        "korean_category": "가상화 장비 > 4. 가상 네트워크 관리",
+        "filename": "hv-25.md"
+      }
+    ]
+  },
+  "12_cloud": {
+    "1_account_management": [
+      {
+        "code": "CA-01",
+        "title": "사용자 계정 관리",
+        "korean_category": "클라우드 > 1. 계정 관리",
+        "filename": "ca-01.md"
+      },
+      {
+        "code": "CA-02",
+        "title": "사용자 정책 관리",
+        "korean_category": "클라우드 > 1. 계정 관리",
+        "filename": "ca-02.md"
+      },
+      {
+        "code": "CA-03",
+        "title": "MFA(Multi-Factor Authentication) 설정",
+        "korean_category": "클라우드 > 1. 계정 관리",
+        "filename": "ca-03.md"
+      },
+      {
+        "code": "CA-04",
+        "title": "클라우드 계정 비밀번호 정책 관리",
+        "korean_category": "클라우드 > 1. 계정 관리",
+        "filename": "ca-04.md"
+      }
+    ],
+    "2_permission_management": [
+      {
+        "code": "CA-05",
+        "title": "인스턴스 서비스 정책 관리",
+        "korean_category": "클라우드 > 2. 권한 관리",
+        "filename": "ca-05.md"
+      },
+      {
+        "code": "CA-06",
+        "title": "네트워크 서비스 정책 관리",
+        "korean_category": "클라우드 > 2. 권한 관리",
+        "filename": "ca-06.md"
+      }
+    ],
+    "3_virtual_resource_management": [
+      {
+        "code": "CA-07",
+        "title": "VPC 네트워크 서브넷 관리",
+        "korean_category": "클라우드 > 3. 가상 리소스 관리",
+        "filename": "ca-07.md"
+      },
+      {
+        "code": "CA-08",
+        "title": "가상 네트워크 리소스 관리",
+        "korean_category": "클라우드 > 3. 가상 리소스 관리",
+        "filename": "ca-08.md"
+      },
+      {
+        "code": "CA-09",
+        "title": "접근 제어 설정 관리",
+        "korean_category": "클라우드 > 3. 가상 리소스 관리",
+        "filename": "ca-09.md"
+      },
+      {
+        "code": "CA-10",
+        "title": "스토리지 리소스 퍼블릭 접근 관리",
+        "korean_category": "클라우드 > 3. 가상 리소스 관리",
+        "filename": "ca-10.md"
+      }
+    ],
+    "4_operation_management": [
+      {
+        "code": "CA-11",
+        "title": "관계형 데이터베이스 암호화 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-11.md"
+      },
+      {
+        "code": "CA-12",
+        "title": "통신구간 암호화 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-12.md"
+      },
+      {
+        "code": "CA-13",
+        "title": "클라우드 서비스 사용자 계정 로깅 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-13.md"
+      },
+      {
+        "code": "CA-14",
+        "title": "인스턴스 로깅 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-14.md"
+      },
+      {
+        "code": "CA-15",
+        "title": "관계형 데이터베이스 로깅 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-15.md"
+      },
+      {
+        "code": "CA-16",
+        "title": "오브젝트 스토리지 버킷 로깅 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-16.md"
+      },
+      {
+        "code": "CA-17",
+        "title": "로그 보관 기간 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-17.md"
+      },
+      {
+        "code": "CA-18",
+        "title": "백업 사용 여부",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-18.md"
+      },
+      {
+        "code": "CA-19",
+        "title": "가상 리소스 이상징후 알림 설정",
+        "korean_category": "클라우드 > 4. 운영 관리",
+        "filename": "ca-19.md"
+      }
+    ]
+  },
+  "10_webapp": {
+    "general": [
+      {
+        "code": "AE",
+        "title": "관리자페이지 노출",
+        "korean_category": "일반",
+        "filename": "19-ae.md"
+      },
+      {
+        "code": "BF",
+        "title": "약한 비밀번호 정책",
+        "korean_category": "일반",
+        "filename": "09-bf.md"
+      },
+      {
+        "code": "CF",
+        "title": "크로스사이트 요청 위조(CSRF)",
+        "korean_category": "일반",
+        "filename": "07-cf.md"
+      },
+      {
+        "code": "CI",
+        "title": "코드 인젝션 (Code Injection)",
+        "korean_category": "일반",
+        "filename": "01-ci.md"
+      },
+      {
+        "code": "DI",
+        "title": "디렉터리 인덱싱",
+        "korean_category": "일반",
+        "filename": "03-di.md"
+      },
+      {
+        "code": "EP",
+        "title": "에러 페이지 적용 미흡",
+        "korean_category": "일반",
+        "filename": "04-ep.md"
+      },
+      {
+        "code": "FD",
+        "title": "파일 다운로드",
+        "korean_category": "일반",
+        "filename": "15-fd.md"
+      },
+      {
+        "code": "FU",
+        "title": "악성 파일 업로드",
+        "korean_category": "일반",
+        "filename": "14-fu.md"
+      },
+      {
+        "code": "IA",
+        "title": "불충분한 인증 절차",
+        "korean_category": "일반",
+        "filename": "10-ia.md"
+      },
+      {
+        "code": "IL",
+        "title": "정보 누출",
+        "korean_category": "일반",
+        "filename": "05-il.md"
+      },
+      {
+        "code": "IN",
+        "title": "불충분한 권한 검증",
+        "korean_category": "일반",
+        "filename": "11-in.md"
+      },
+      {
+        "code": "IS",
+        "title": "불충분한 세션 관리",
+        "korean_category": "일반",
+        "filename": "16-is.md"
+      },
+      {
+        "code": "PR",
+        "title": "취약한 비밀번호 복구 절차",
+        "korean_category": "일반",
+        "filename": "12-pr.md"
+      },
+      {
+        "code": "PV",
+        "title": "프로세스 검증 누락",
+        "korean_category": "일반",
+        "filename": "13-pv.md"
+      },
+      {
+        "code": "SF",
+        "title": "서버사이드 요청 위조(SSRF)",
+        "korean_category": "일반",
+        "filename": "08-sf.md"
+      },
+      {
+        "code": "SI",
+        "title": "SQL 인젝션 (SQL Injection)",
+        "korean_category": "일반",
+        "filename": "02-si.md"
+      },
+      {
+        "code": "SN",
+        "title": "데이터 평문 전송",
+        "korean_category": "일반",
+        "filename": "17-sn.md"
+      },
+      {
+        "code": "WM",
+        "title": "불필요한 Method 악용",
+        "korean_category": "일반",
+        "filename": "21-wm.md"
+      },
+      {
+        "code": "XS",
+        "title": "크로스사이트 스크립트",
+        "korean_category": "일반",
+        "filename": "06-xs.md"
+      }
+    ],
+    "web_app": [
+      {
+        "code": "CC-1",
+        "title": "쿠키 변조",
+        "korean_category": "Web Application(웹)",
+        "filename": "cc-1.md"
+      },
+      {
+        "code": "CC-2",
+        "title": "자동화 공격",
+        "korean_category": "Web Application(웹)",
+        "filename": "cc-2.md"
+      }
+    ]
+  }
+}

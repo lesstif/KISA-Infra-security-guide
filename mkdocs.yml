@@ -1,0 +1,64 @@
+site_name: KISA 기술적 취약점 분석·평가 상세가이드
+site_description: 주요정보통신기반시설 기술적 취약점 분석·평가 방법 상세가이드
+site_author: KISA
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  features:
+    - navigation.tabs          # 상단 탭
+    - navigation.tabs.sticky   # 탭 고정 (스크롤해도 보임)
+    - navigation.sections
+    - navigation.expand        # 사이드바 자동 확장
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search:
+      lang: ko
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+
+# 간결한 nav 구조 (모든 항목 표시)
+nav:
+  - 홈: index.md
+  - 01. Unix: 01_unix/index.md
+  - 02. Windows: 02_windows/index.md
+  - 03. Web: 03_web/index.md
+  - 04. Security: 04_security/index.md
+  - 05. Network: 05_network/index.md
+  - 06. Control: 06_control/index.md
+  - 07. PC: 07_pc/index.md
+  - 08. DBMS: 08_dbms/index.md
+  - 09. Mobile: 09_mobile/index.md
+  - 10. WebApp: 10_webapp/index.md
+  - 11. Virtual: 11_virtualization/index.md
+  - 12. Cloud: 12_cloud/index.md
