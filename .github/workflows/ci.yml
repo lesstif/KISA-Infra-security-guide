@@ -1,0 +1,49 @@
+name: ci 
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install -r requirements.txt
+      - run: mkdocs gh-deploy --force
+```
+
+### 4단계: GitHub Pages 활성화
+
+1. GitHub 저장소 페이지에서 `Settings` 탭 클릭
+2. 왼쪽 메뉴에서 `Pages` 클릭
+3. **Source** 섹션:
+   - **Branch**: `gh-pages` 선택
+   - **Folder**: `/ (root)` 선택
+4. `Save` 클릭
+
+### 5단계: 배포 확인
+
+1. **Actions 탭**에서 배포 진행 상황 확인
+   - 저장소 → `Actions` 탭
+   - 최근 워크플로우 실행 확인
+   - ✅ 녹색 체크 표시가 나타나면 배포 완료
+
+2. **배포된 사이트 확인**
+```
+   https://lesstif.github.io/KISA-Infra-security-guide/
