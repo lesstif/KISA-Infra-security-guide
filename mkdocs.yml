@@ -1,6 +1,14 @@
 site_name: KISA 기술적 취약점 분석·평가 상세가이드
+site_url: https://lesstif.github.io/KISA-Infra-security-guide/
 site_description: 주요정보통신기반시설 기술적 취약점 분석·평가 방법 상세가이드
-site_author: KISA
+site_author: KISA(한국 인터넷진흥원)
+
+# ⭐ 중요: 서브 디렉토리 배포를 위한 설정
+use_directory_urls: true
+
+# Repository
+repo_name: lesstif/KISA-Infra-security-guide
+repo_url: https://github.com/lesstif/KISA-Infra-security-guide
 
 theme:
   name: material
