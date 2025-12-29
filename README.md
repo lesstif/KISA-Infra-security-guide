@@ -98,11 +98,13 @@ location.replace("[에러 페이지 경로]/login/login.asp?ba=search")
 ## 🚀 빠른 시작
 
 ```bash
-# 압축 해제
-tar -xzf kisa_final_v2.tar.gz
-cd kisa_complete
+# git clone & install virtualenv
+git clone git@github.com:lesstif/KISA-Infra-security-guide.git
+cd KISA-Infra-security-guide
 
 # MkDocs 설치
+python3 -m venv  venv
+source venv/bin/activate
 pip install -r requirements.txt
 
 # 개발 서버 실행
