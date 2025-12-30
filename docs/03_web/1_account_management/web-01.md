@@ -40,9 +40,7 @@ Tomcat, JEUS
 
 **✅ 양호**: 관리자 페이지를 사용하지 않거나, 계정명이 기본 계정명으로 설정되어 있지 않은 경우
 
-**❌ 취약**: 계정명이 기본 계정명으로 설정되어 있거나, 추측하기 쉬운 문자 조합으로 이루어진 계정명을
-
-사용하는 경우
+**❌ 취약**: 계정명이 기본 계정명으로 설정되어 있거나, 추측하기 쉬운 문자 조합으로 이루어진 계정명을 사용하는 경우
 
 ## 조치 방법
 
@@ -56,13 +54,18 @@ Tomcat, JEUS
 
 ### Tomcat
 
-**Step 1) 기본 계정명 변경 또는 관리자 페이지 비활성화(기본값: 비활성화)**
-
-# vi <Tomcat 설치 디렉터리>/conf/server.xml 예시) <user username="admin" password="XNDJxndn264!@" roles="manager-gui"/>
-
-**Step 2) Tomcat 재구동**
-
+1. 기본 계정명 변경 또는 관리자 페이지 비활성화(기본값: 비활성화)
+```
+# vi <Tomcat 설치 디렉터리>/conf/server.xml
+```
+예시
+```
+<user username="admin" password="XNDJxndn264!@" roles="manager-gui"/>
+```
+1. Tomcat 재구동
+```bash
 # systemctl restart tomcat
+```
 
 !!! info "“roles = manager-gui, manager-script, manager-jmx, manager-status” 설정 시 관리자 계정 및 페이지 활성화 상태"
 
@@ -70,19 +73,17 @@ Tomcat, JEUS
 
 ### JEUS
 
-**Step 1) Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > 기본**
+1. Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > 기본 관리자 계정의 Name 확인
 
-관리자 계정의 Name 확인
+1. Lock & EDIT > Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > ADD > 기본 관리자 계정의 Name을 유추하기 어려운 계정 이름 입력 
+1. Administrators 그룹 체크 후 확인 > Accounts & Policies Management > policies > Role Permissions > AdministratorsRole > “Activate Changes”을 눌러 설정 저장(웹 서비스명과 연관된 단어 “administrator” 계정명 사용금지)
+1. “Activate Changes”을 눌러 설정 저장
 
-**[ 기본 관리자 계정 확인 ]**
-
-**Step 1) Lock & EDIT > Security > Security Domains 페이지 해당 도메인 > Account & Policies Management >**
-
-Users > ADD > 기본 관리자 계정의 Name을 유추하기 어려운 계정 이름 입력 > Administrators 그룹 체크 후 확인 > Accounts & Policies Management > policies > Role Permissions > AdministratorsRole > “Activate Changes”을 눌러 설정 저장(웹 서비스명과 연관된 단어 “administrator” 계정명 사용금지) > “Activate Changes”을 눌러 설정 저장
-
-**Step 2) JEUS 재구동**
-
-# ./stopServer –host [도메인명]:[포트 번호] # ./startDomainAdminServer –host [도메인명]:[포트 번호]
+1. JEUS 재구동
+```
+# ./stopServer –host [도메인명]:[포트 번호]
+# ./startDomainAdminServer –host [도메인명]:[포트 번호]
+```
 
 !!! info "기본 계정명 변경이 불가능할 경우 초기 비밀번호 변경으로 보완 필요"
 

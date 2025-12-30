@@ -50,27 +50,26 @@ Tomcat, IIS, JEUS
 
 ### Tomcat
 
-**Step 1) tomcat-users.xml 파일 권한 변경**
-
+1. tomcat-users.xml 파일 권한 변경
+```
 # chmod 600 /<Tomcat 설치 디렉터리>/tomcat-users.xml
+```
 
 ### IIS
 
-**Step 1) “%systemroot%\system32\config\SAM” 파일 속성 > 보안 > 편집 > Administrators, SYSTEM을 제외한**
+1. “%systemroot%\system32\config\SAM” 파일 속성 > 보안 > 편집 > Administrators, SYSTEM을 제외한 계정 및 그룹 권한 제거
 
-계정 및 그룹 권한 제거
-
-**[ SAM 파일 권한 설정 ]**
-
-03. 웹 서비스
+![SAM 파일 권한 설정](https://example.com/image.png)
 
 ### JEUS
 
-**Step 1) [비밀번호 파일] 또는 [Role 파일] 권한 설정**
-
-# chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/accounts.xml # chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/policies.xml
-
-**Step 2) JEUS 재시작**
-
-# ./stopServer –host <도메인명>:<포트 번호> # ./startDomainAdminServer –host <도메인명>:<포트 번호>
-
+1. [비밀번호 파일] 또는 [Role 파일] 권한 설정
+```
+# chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/accounts.xml 
+# chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/policies.xml
+```
+1. JEUS 재시작
+```
+# ./stopServer –host <도메인명>:<포트 번호> 
+# ./startDomainAdminServer –host <도메인명>:<포트 번호>
+```
