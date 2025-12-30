@@ -1,5 +1,8 @@
 # KISA 주요정보통신기반시설 기술적 취약점 분석·평가 방법 상세가이드
 
+## Github Pages 주소
+[https://lesstif.github.io/KISA-Infra-security-guide/](https://lesstif.github.io/KISA-Infra-security-guide/) 에 연결하시면 웹 버전을 보실수 있습니다.
+
 ## 개요
 
 한국 인터넷진흥원이 25년 12월에 발표한 ["26년 주요정보통신기반시설 기술적 취약점 분석·평가 방법 상세가이드"](https://www.kisa.or.kr/2060204/form?postSeq=22&page=1) PDF는 인프라와 서비스의 보안을 강화하는데 많은 도움이 되는 문서지만 다음과 같은 개선사항이 있으면 좋을 것 같아서 저장소를 만들었습니다.
@@ -18,11 +21,6 @@
 * Claude 에게 PDF 파싱시 정규식같은 규칙에 기반하지 말고 문맥을 이해해서 개별 markdown 을 만들라고 계속 지시했지만 워낙 크고 복잡하고 구조화가 필요한 PDF 다 보니 표에 있는 내용들이 제대로 처리 안 된 내용들이 있습니다.
 * 이 저장소를 참고하실때 원본의 해당 항목을 같이 참고해 주시고 수정 사항이 필요하면 PR 부탁 드립니다.
 * 원본 PDF에 첨부되어 있는 이미지들은 아직 업로드되지 않았습니다.
-
-## Github Pages 주소
-
-[https://lesstif.github.io/KISA-Infra-security-guide/](https://lesstif.github.io/KISA-Infra-security-guide/) 에 연결하시면 웹 버전을 보실수 있습니다.
-
 
 ## 작업 내역
 
