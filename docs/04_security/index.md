@@ -8,16 +8,16 @@
 
 ## 보안 장비 > 1. 계정 관리
 
-- [S-01: S-01](1_account_management/s-01.md)
+- [S-01: 보안장비 Default 계정 변경](1_account_management/s-01.md)
 - [S-02: 비밀번호 관리정책 설정](1_account_management/s-02.md)
-- [S-03: S-03](1_account_management/s-03.md)
-- [S-04: S-04](1_account_management/s-04.md)
+- [S-03: 보안장비 계정별 권한 설정](1_account_management/s-03.md)
+- [S-04: 보안장비 계정 관리](1_account_management/s-04.md)
 - [S-05: 계정 잠금 임계값 설정](1_account_management/s-05.md)
 
 ## 보안 장비 > 2. 접근 관리
 
-- [S-06: S-06](2_access_management/s-06.md)
-- [S-07: S-07](2_access_management/s-07.md)
+- [S-06: 보안 장비 원격 관리 접근 통제](2_access_management/s-06.md)
+- [S-07: 보안장비 보안 접속](2_access_management/s-07.md)
 - [S-08: 세션 종료 시간 설정](2_access_management/s-08.md)
 
 ## 보안 장비 > 3. 패치 관리
@@ -26,9 +26,9 @@
 
 ## 보안 장비 > 4. 로그 관리
 
-- [S-10: S-10](4_log_management/s-10.md)
-- [S-11: S-11](4_log_management/s-11.md)
-- [S-12: S-12](4_log_management/s-12.md)
+- [S-10: 보안장비 로그 설정](4_log_management/s-10.md)
+- [S-11: 보안장비 로그 보관](4_log_management/s-11.md)
+- [S-12: 보안장비 정책 백업 설정](4_log_management/s-12.md)
 - [S-13: 원격 로그 서버 사용](4_log_management/s-13.md)
 - [S-14: NTP 및 시각 동기화 설정](4_log_management/s-14.md)
 
