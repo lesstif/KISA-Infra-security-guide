@@ -74,7 +74,7 @@ Tomcat, JEUS
 ### JEUS
 
 1. Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > 기본 관리자 계정의 Name 확인
-
+![Guest 계정 상태 사용 안 함 설정 ](../../images/03_web/web-006.jpg)
 1. Lock & EDIT > Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > ADD > 기본 관리자 계정의 Name을 유추하기 어려운 계정 이름 입력 
 1. Administrators 그룹 체크 후 확인 > Accounts & Policies Management > policies > Role Permissions > AdministratorsRole > “Activate Changes”을 눌러 설정 저장(웹 서비스명과 연관된 단어 “administrator” 계정명 사용금지)
 1. “Activate Changes”을 눌러 설정 저장

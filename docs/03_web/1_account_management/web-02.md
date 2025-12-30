@@ -67,6 +67,7 @@ Tomcat, IIS, JEUS
 ### JEUS
 
 1. Lock & EDIT > Security > Security Domains 페이지 해당 도메인 > Account & Policies Management > Users > 기본 관리자 계정의 비밀번호 변경 > 확인 > “Activate Changes”을 눌러 설정 저장
+![관리자 비밀번호 설정](../../images/03_web/web-009.jpg)
 !!! info "SHA-256 이상 암호화 방식 비밀번호로 설정"
 
 ## 비밀번호 설정 기준
