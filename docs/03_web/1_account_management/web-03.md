@@ -1,12 +1,10 @@
 # WEB-03: 비밀번호 파일 권한 관리
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 상
 
 ---
-
-웹 서비스 > 1. 계정 관리
 
 ## 개요
 
@@ -24,7 +22,7 @@
 
 ### 참고
 
--
+-   
 
 ## 점검 대상 및 판단 기준
 
@@ -50,26 +48,25 @@ Tomcat, IIS, JEUS
 
 ### Tomcat
 
-1. tomcat-users.xml 파일 권한 변경
-```
-# chmod 600 /<Tomcat 설치 디렉터리>/tomcat-users.xml
-```
+1.  **`tomcat-users.xml` 파일 권한 변경**
+    ```bash
+    chmod 600 /<Tomcat 설치 디렉터리>/tomcat-users.xml
+    ```
 
 ### IIS
 
-1. “%systemroot%\system32\config\SAM” 파일 속성 > 보안 > 편집 > Administrators, SYSTEM을 제외한 계정 및 그룹 권한 제거
-
-![SAM 파일 권한 설정](https://example.com/image.png)
+1.  **`%systemroot%\system32\config\SAM` 파일 속성 > 보안 > 편집 > Administrators, SYSTEM을 제외한 계정 및 그룹 권한 제거**
+    ![SAM 파일 권한 설정](https://example.com/image.png)
 
 ### JEUS
 
-1. [비밀번호 파일] 또는 [Role 파일] 권한 설정
-```
-# chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/accounts.xml 
-# chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/policies.xml
-```
-1. JEUS 재시작
-```
-# ./stopServer –host <도메인명>:<포트 번호> 
-# ./startDomainAdminServer –host <도메인명>:<포트 번호>
-```
+1.  **[비밀번호 파일] 또는 [Role 파일] 권한 설정**
+    ```bash
+    chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/accounts.xml
+    chmod 600 /<JEUS 설치 디렉터리>/jeus_domain/config/security/SYSTEM_DOMAIN/policies.xml
+    ```
+2.  **JEUS 재시작**
+    ```bash
+    ./stopServer -host <도메인명>:<포트 번호>
+    ./startDomainAdminServer -host <도메인명>:<포트 번호>
+    ```

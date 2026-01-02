@@ -1,14 +1,10 @@
 # WEB-14: 웹 서비스 경로 내 파일의 접근 통제
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 상
 
 ---
-
-03. 웹 서비스
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -26,9 +22,8 @@
 
 ### 참고
 
-!!! info "웹 서비스 경로 내 파일/디렉터리에 접근 권한을 허용할 때는 필요한 때에만 설정하고, 필요한 특정"
-
-위치의 특정 사용자에게만 허용하도록 조치
+!!! info "권한 설정"
+    웹 서비스 경로 내 파일/디렉터리에 접근 권한을 허용할 때는 필요한 때에만 설정하고, 필요한 특정 위치의 특정 사용자에게만 허용하도록 조치
 
 ## 점검 대상 및 판단 기준
 
@@ -54,39 +49,47 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### Apache
 
-**Step 1) 루트 디렉터리 내 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-# chown –R <Apache 계정>]:<Apache 그룹> apache2.conf (또는 httpd.conf) # chmod -R 750 apache2.conf (또는 httpd.conf)
+1.  **루트 디렉터리 내 불필요한 권한 삭제 또는 적절한 권한 부여**
+    ```bash
+    chown –R <Apache 계정>:<Apache 그룹> apache2.conf # (또는 httpd.conf)
+    chmod -R 750 apache2.conf # (또는 httpd.conf)
+    ```
 
 ### Tomcat
 
-**Step 1) 루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-# chown –R [Tomcat 계정]:[Tomcat 그룹] web.xml # chmod -R 750 web.xml
+1.  **루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
+    ```bash
+    chown –R [Tomcat 계정]:[Tomcat 그룹] web.xml
+    chmod -R 750 web.xml
+    ```
 
 ### Nginx
 
-**Step 1) 루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-# chown –R <Nginx 계정>:<Nginx 그룹> web.xml # chmod -R 750 web.xml
+1.  **루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
+    ```bash
+    chown –R <Nginx 계정>:<Nginx 그룹> web.xml
+    chmod -R 750 web.xml
+    ```
 
 ### IIS
 
-**Step 1) 실제 경로 디렉터리 내 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-web.config > 속성 > 보안 > 편집 > “그룹 또는 사용자 이름”의 불필요 권한 제거
-
-**[ 설정 파일 권한 확인 ]**
+1.  **실제 경로 디렉터리 내 불필요한 권한 삭제 또는 적절한 권한 부여**
+    -   `web.config` > `속성` > `보안` > `편집` > “그룹 또는 사용자 이름”의 불필요 권한 제거
+    **[ 설정 파일 권한 확인 ]**
 
 ### JEUS
 
-**Step 1) 루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-# chown –R <Jeus 계정>:<Jeus 그룹> accounts.xml # chmod -R 750 accounts.xml
+1.  **루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
+    ```bash
+    chown –R <Jeus 계정>:<Jeus 그룹> accounts.xml
+    chmod -R 750 accounts.xml
+    ```
 
 ### WebtoB
 
-**Step 1) 루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
-
-# chown –R <WebtoB 계정>:<WebtoB 그룹> http.m # chmod -R 750 http.m
+1.  **루트 디렉터리 불필요한 권한 삭제 또는 적절한 권한 부여**
+    ```bash
+    chown –R <WebtoB 계정>:<WebtoB 그룹> http.m
+    chmod -R 750 http.m
+    ```
 

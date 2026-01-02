@@ -1,14 +1,10 @@
 # WEB-24: 별도의 업로드 경로 사용 및 권한 설정
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 중
 
 ---
-
-03. 웹 서비스
-
-웹 서비스 > 3. 보안 설정
 
 ## 개요
 
@@ -52,109 +48,148 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### Apache
 
-**Step 1) apache2.conf 파일 내 업로드 경로 및 웹서비스 디렉터리 경로  확인**
-
-# vi /[Apache 설치 디렉터리]/apache2/apache2.conf(또는 apache2.conf) <Directory /var/www/html/uploads> Options None AllowOverride None Require all denied </Directory>
-
-**Step 2) 별도 업로드 경로 생성**
-
-# mkdir [웹서비스 디렉터리 외 경로] # mkdir /var/www/html/uploads
-
-**Step 3) 파일 실행 권한 확인**
-
-# ls -al /[Apache 업로드 디렉터리]
-
-**Step 4) 업로드 디렉터리 권한 설정**
-
-# chmod 750 /var/www/html/uploads/ # chown www-data:www-data /var/www/html/uploads/
-
-**Step 5) apache2.conf 파일 내 업로드 디렉터리 접근제한 설정**
-
-# vi /[Apache 설치 디렉터리]/apache2/apache2.conf <Directory "/var/www/html/uploads/"> Require all denied </Directory>
+1.  **apache2.conf 파일 내 업로드 경로 및 웹서비스 디렉터리 경로  확인**
+    ```bash
+    vi /[Apache 설치 디렉터리]/apache2/apache2.conf # (또는 apache2.conf)
+    ```
+    ```apache
+    <Directory /var/www/html/uploads>
+        Options None
+        AllowOverride None
+        Require all denied
+    </Directory>
+    ```
+2.  **별도 업로드 경로 생성**
+    ```bash
+    mkdir [웹서비스 디렉터리 외 경로]
+    # mkdir /var/www/html/uploads
+    ```
+3.  **파일 실행 권한 확인**
+    ```bash
+    ls -al /[Apache 업로드 디렉터리]
+    ```
+4.  **업로드 디렉터리 권한 설정**
+    ```bash
+    chmod 750 /var/www/html/uploads/
+    chown www-data:www-data /var/www/html/uploads/
+    ```
+5.  **apache2.conf 파일 내 업로드 디렉터리 접근제한 설정**
+    ```bash
+    vi /[Apache 설치 디렉터리]/apache2/apache2.conf
+    ```
+    ```apache
+    <Directory "/var/www/html/uploads/">
+        Require all denied
+    </Directory>
+    ```
 
 ### Tomcat
 
-**Step 1) server.xml 파일 내 Context 요소 allowLinking 옵션 설정 (기본값 : 업로드 디렉터리 경로 존재하지 않음)**
-
-# vi /[Tomcat 설치 디렉터리]/conf/context.xml <servlet> <servlet-name>fileUploadServlet</servlet-name> <servlet-class>com.example.FileUploadServlet</servlet-class> </servlet>
-
-**Step 2) 별도의 업로드 경로 생성**
-
-# mkdir [웹서비스 디렉터리 외 경로] # mkdir /var/www/html/uploads
-
-**Step 3) 업로드 디렉터리 권한 설정**
-
-chmod 750 /var/www/html/uploads/ chown tomcat:tomcat /var/www/html/uploads/
-
-**Step 4) 지정한 디렉터리 권한을 웹 서비스에서 사용**
+1.  **server.xml 파일 내 Context 요소 allowLinking 옵션 설정 (기본값 : 업로드 디렉터리 경로 존재하지 않음)**
+    ```bash
+    vi /[Tomcat 설치 디렉터리]/conf/context.xml
+    ```
+    ```xml
+    <servlet>
+        <servlet-name>fileUploadServlet</servlet-name>
+        <servlet-class>com.example.FileUploadServlet</servlet-class>
+    </servlet>
+    ```
+2.  **별도의 업로드 경로 생성**
+    ```bash
+    mkdir [웹서비스 디렉터리 외 경로]
+    # mkdir /var/www/html/uploads
+    ```
+3.  **업로드 디렉터리 권한 설정**
+    ```bash
+    chmod 750 /var/www/html/uploads/
+    chown tomcat:tomcat /var/www/html/uploads/
+    ```
+4.  **지정한 디렉터리 권한을 웹 서비스에서 사용**
 
 ### Nginx
 
-**Step 1) nginx.conf 파일 내 업로드 경로 확인 및 웹서비스 디렉터리 경로 사용 여부 확인**
-
-#vi /[Nginx 설치 디렉터리]/conf/nginx.conf
-
-**Step 2) 별도의 업로드 경로 생성**
-
-mkdir [웹서비스 디렉터리 외 경로] mkdir /var/www/html/uploads
-
-03. 웹 서비스
-
-**Step 3) 업로드 디렉터리의 권한 설정**
-
-chmod 750 /var/www/html/uploads/ chown www-data:www-data /var/www/html/uploads/
-
-**Step 4) nginx.conf 파일 내 업로드 디렉터리 접근제한 설정**
-
-#vi /[Nginx 설치 디렉터리]/conf/nginx.conf location /uploads/ { alias /var/www/html/uploads/; autoindex on; }
-
-**Step 5) 변경된 설정 내용을 적용하기 위하여 Nginx 데몬 재구동**
-
-#systemctl restart nginx
+1.  **nginx.conf 파일 내 업로드 경로 확인 및 웹서비스 디렉터리 경로 사용 여부 확인**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/conf/nginx.conf
+    ```
+2.  **별도의 업로드 경로 생성**
+    ```bash
+    mkdir [웹서비스 디렉터리 외 경로]
+    # mkdir /var/www/html/uploads
+    ```
+3.  **업로드 디렉터리의 권한 설정**
+    ```bash
+    chmod 750 /var/www/html/uploads/
+    chown www-data:www-data /var/www/html/uploads/
+    ```
+4.  **nginx.conf 파일 내 업로드 디렉터리 접근제한 설정**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/conf/nginx.conf
+    ```
+    ```nginx
+    location /uploads/ {
+        alias /var/www/html/uploads/;
+        autoindex on;
+    }
+    ```
+5.  **변경된 설정 내용을 적용하기 위하여 Nginx 데몬 재구동**
+    ```bash
+    systemctl restart nginx
+    ```
 
 ### IIS
 
-**Step 1) 업로드 디렉터리 경로 확인**
-
-제어판 > 관리 도구 > 인터넷 정보 서비스(IIS) 관리자 > 해당 웹사이트 > 기본 설정 > ‘실제 경로’에서 홈 디렉터리 위치 확인
-
-**Step 1) 실제 경로에 입력된 홈 디렉터리로 업로드 디렉터리 확인**
-
-**[ 홈 디렉터리 위치 확인 ]**
-
-**Step 2) 웹 서비스 외부에 업로드 디렉터리를 생성**
-
-[외부 업로드 경로] > 새 폴더 생성 및 이름 지정
-
-**Step 3) 새로 생성한 폴더에 대한 권한 설정**
-
-[외부 업로드 파일] > 속성 > 보안 > 편집 > [IIS 구동 계정 그룹] 추가 및 쓰기 권한 부여 설정
+1.  **업로드 디렉터리 경로 확인**
+    -   `제어판` > `관리 도구` > `인터넷 정보 서비스(IIS) 관리자` > 해당 웹사이트 > `기본 설정` > ‘실제 경로’에서 홈 디렉터리 위치 확인
+2.  **실제 경로에 입력된 홈 디렉터리로 업로드 디렉터리 확인**
+    **[ 홈 디렉터리 위치 확인 ]**
+3.  **웹 서비스 외부에 업로드 디렉터리를 생성**
+    -   [외부 업로드 경로] > 새 폴더 생성 및 이름 지정
+4.  **새로 생성한 폴더에 대한 권한 설정**
+    -   [외부 업로드 파일] > `속성` > `보안` > `편집` > [IIS 구동 계정 그룹] 추가 및 쓰기 권한 부여 설정
 
 ### JEUS
 
-**Step 1) web.xml 파일 내 파일 업로드 경로 확인**
-
-# vi /[JEUS 설치 디렉터리]/conf/web.xml(또는 webcommon.xml) <context-param> <param-name>uploadDir</param-name> <param-value>/path/to/your/upload/directory</param-value> </context-param>
-
-**Step 2) 파일 업로드 경로 권한 확인**
-
-# ls –al /[JEUS 업로드 디렉터리]
-
-**Step 3) 업로드 디렉터리 권한 설정**
-
-# chmod 750 # ls –al  /[JEUS 업로드 디렉터리] # chown jeus:jeus /[JEUS 업로드 디렉터리]
+1.  **web.xml 파일 내 파일 업로드 경로 확인**
+    ```bash
+    vi /[JEUS 설치 디렉터리]/conf/web.xml # (또는 webcommon.xml)
+    ```
+    ```xml
+    <context-param>
+        <param-name>uploadDir</param-name>
+        <param-value>/path/to/your/upload/directory</param-value>
+    </context-param>
+    ```
+2.  **파일 업로드 경로 권한 확인**
+    ```bash
+    ls –al /[JEUS 업로드 디렉터리]
+    ```
+3.  **업로드 디렉터리 권한 설정**
+    ```bash
+    chmod 750 /path/to/your/upload/directory
+    ls –al  /[JEUS 업로드 디렉터리]
+    chown jeus:jeus /[JEUS 업로드 디렉터리]
+    ```
 
 ### WebtoB
 
-**Step 1) http.m 파일 내 파일 업로드 경로 확인**
-
-# cat /root/webtob/config/http.m *ALIAS alias_upload    URI = "/upload/", RealPath = "/home/tmax/webtob/uploads/"
-
-**Step 2) 파일 업로드 경로 권한 확인**
-
-# ls –al /[WebtoB 업로드 디렉터리]
-
-**Step 3) 업로드 디렉터리의 권한 설정**
-
-# chmod 750 # ls –al /[WebtoB 업로드 디렉터리] # chown tmax:tmax /[WebtoB 업로드 디렉터리]
+1.  **http.m 파일 내 파일 업로드 경로 확인**
+    ```bash
+    cat /root/webtob/config/http.m
+    ```
+    ```text
+    *ALIAS
+    alias_upload    URI = "/upload/", RealPath = "/home/tmax/webtob/uploads/"
+    ```
+2.  **파일 업로드 경로 권한 확인**
+    ```bash
+    ls –al /[WebtoB 업로드 디렉터리]
+    ```
+3.  **업로드 디렉터리의 권한 설정**
+    ```bash
+    chmod 750 /[WebtoB 업로드 디렉터리]
+    ls –al /[WebtoB 업로드 디렉터리]
+    chown tmax:tmax /[WebtoB 업로드 디렉터리]
+    ```
 

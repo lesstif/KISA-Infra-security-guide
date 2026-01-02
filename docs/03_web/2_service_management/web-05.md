@@ -1,14 +1,10 @@
 # WEB-05: 지정하지 않은 CGI/ISAPI 실행 제한
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 상
 
 ---
-
-03. 웹 서비스
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -27,9 +23,7 @@ CGI 스크립트를 정해진 디렉터리에서만 실행되도록 하여 악�
 ### 참고
 
 !!! info "CGI(Common Gateway Interface)"
-    사용자가 서버로 보낸 데이터를 서버에서 작동 중인 데이터
-
-처리프로그램에 전달하고, 여기에서 처리된 데이터를 다시 서버로 되돌려 보내는 등의 일을 하는 표준 인터페이스 규격
+    사용자가 서버로 보낸 데이터를 서버에서 작동 중인 데이터 처리프로그램에 전달하고, 여기에서 처리된 데이터를 다시 서버로 되돌려 보내는 등의 일을 하는 표준 인터페이스 규격
 
 ## 점검 대상 및 판단 기준
 
@@ -55,51 +49,89 @@ CGI 스크립트를 정해진 디렉터리 내에서만 실행할 수 있도록 
 
 ### Apache
 
-**Step 1) apache 설정 파일 내 CGI 모듈 비활성화 또는 주석 처리**
-
-#  vi /<Apache 설치 디렉터리>/httpd.conf(또는 apache.conf) #LoadModule cgi_module modules/mod_cgi.so #LoadModule cgid_module modules/mod_cgid.so
-
-**Step 2) apache 설정 파일 내 설정된 모든 디렉터리의 Options 지시자에서 ExecCGI 옵션 제거**
-
-# vi /<Apache 설치 디렉터리>/apache.conf(또는 httpd.conf) <Directory "/var/www/cgi-bin"> Options -ExecCGI </Directory>
-
-**Step 3) Apache 재시작**
+1.  **apache 설정 파일 내 CGI 모듈 비활성화 또는 주석 처리**
+    ```bash
+    vi /<Apache 설치 디렉터리>/httpd.conf
+    # 또는 apache.conf
+    ```
+    ```apache
+    #LoadModule cgi_module modules/mod_cgi.so
+    #LoadModule cgid_module modules/mod_cgid.so
+    ```
+2.  **apache 설정 파일 내 설정된 모든 디렉터리의 `Options` 지시자에서 `ExecCGI` 옵션 제거**
+    ```bash
+    vi /<Apache 설치 디렉터리>/apache.conf
+    # 또는 httpd.conf
+    ```
+    ```apache
+    <Directory "/var/www/cgi-bin">
+        Options -ExecCGI
+    </Directory>
+    ```
+3.  **Apache 재시작**
 
 ### Tomcat
 
-**Step 1) web.xml 파일 내 CGI 매핑 비활성화**
-
-<!-- <servlet-mapping> <servlet-name>cgi</servlet-name> <url-pattern>/cgi-bin/*</url-pattern> </servlet-mapping> -->
-
-**Step 2) Tomcat 재시작**
+1.  **`web.xml` 파일 내 CGI 매핑 비활성화**
+    ```xml
+    <!--
+    <servlet-mapping>
+        <servlet-name>cgi</servlet-name>
+        <url-pattern>/cgi-bin/*</url-pattern>
+    </servlet-mapping>
+    -->
+    ```
+2.  **Tomcat 재시작**
 
 ### Nginx
 
-**Step 1) nginx.conf 파일 내 Fastcgi 사용 여부 확인**
-
-# cat /<Nginx 설치 디렉터리>/conf/nginx.conf location ~ \.cgi$ { #fastcgi_pass <FastCGI 서버 주소>:<FastCGI 서버 통신 포트>; #include fastcgi_params; }
-
-**Step 2) Nginx 재시작**
+1.  **`nginx.conf` 파일 내 Fastcgi 사용 여부 확인**
+    ```bash
+    cat /<Nginx 설치 디렉터리>/conf/nginx.conf
+    ```
+    ```nginx
+    location ~ \.cgi$ {
+        #fastcgi_pass <FastCGI 서버 주소>:<FastCGI 서버 통신 포트>;
+        #include fastcgi_params;
+    }
+    ```
+2.  **Nginx 재시작**
 
 ### IIS
 
-**Step 1) CGI 디렉터리 설정 해제**
-
-IIS 관리자 > 서버 선택 > ISAPI 및 CGI 제한 > 기능 열기 > 작업 > 기능 설정 편집 > 사용하지 않는 CGI/ISAPI 모듈 설정 해제
-
-**[ CGI/ISAPI 모듈 설정 확인 ]**
-
-03. 웹 서비스
+1.  **CGI 디렉터리 설정 해제**
+    -   `IIS 관리자` > 서버 선택 > `ISAPI 및 CGI 제한` > 기능 열기 > 작업 > `기능 설정 편집` > 사용하지 않는 CGI/ISAPI 모듈 설정 해제
+    **[ CGI/ISAPI 모듈 설정 확인 ]**
 
 ### WebtoB
 
-**Step 1) http.m 파일 내 활성화되어 있는 *SVRGROUP, *SERVER, *URI 절에서 CGI 옵션 제거 또는 비활성화**
+1.  **`http.m` 파일 내 활성화되어 있는 `*SVRGROUP`, `*SERVER`, `*URI` 절에서 CGI 옵션 제거 또는 비활성화**
+    ```bash
+    vi /<WebtoB 설치 디렉터리>/config/http.m
+    ```
+    설정 예시:
+    ```text
+    *SVRGROUP
+    htmlg SVRTYPE = HTML
+    #cgig SVRTYPE = CGI
+    ssig SVRTYPE = SSI
+    jsvg SVRTYPE = JSV
 
-# vi /<WebtoB 설치 디렉터리>/config/http.m“ *SVRGROUP htmlg SVRTYPE = HTML #cgig SVRTYPE = CGI ssig SVRTYPE = SSI jsvg SVRTYPE = JSV *SERVER #cgi SVGNAME = cgig, MinProc = 2, MaxProc = 10, ASQCount = 1 ssi SVGNAME = ssig, MinProc = 2, MaxProc = 10, ASQCount = 1 MyGroup SVGNAME = jsvg, MinProc = 20, MaxProc = 20 *URI #uri1 Uri = "/cgi-bin/",   Svrtype = CGI
+    *SERVER
+    #cgi SVGNAME = cgig, MinProc = 2, MaxProc = 10, ASQCount = 1
+    ssi SVGNAME = ssig, MinProc = 2, MaxProc = 10, ASQCount = 1
+    MyGroup SVGNAME = jsvg, MinProc = 20, MaxProc = 20
 
-**Step 2) 설정 파일 컴파일 및 재구동**
+    *URI
+    #uri1 Uri = "/cgi-bin/",   Svrtype = CGI
+    ```
+2.  **설정 파일 컴파일 및 재구동**
+    ```bash
+    wscfl -I http.m
+    wsdown
+    wsboot
+    ```
 
-# wscfl -I http.m # wsdown # wsboot
-
-!!! info "필요한 경우 해당 디렉터리만 제한적으로 CGI 스크립트 실행 설정"
+!!! info "참고"
+    필요한 경우 해당 디렉터리만 제한적으로 CGI 스크립트 실행 설정
 

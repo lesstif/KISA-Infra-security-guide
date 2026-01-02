@@ -1,14 +1,10 @@
 # WEB-09: 웹 서비스 프로세스 권한 제한
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 상
 
 ---
-
-03. 웹 서비스
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -36,9 +32,7 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### 판단 기준
 
-**✅ 양호**: 웹 프로세스(웹 서비스)가 관리자 권한이 부여된 계정이 아닌 운영에 필요한 최소한의 권한을 가진
-
-별도의 계정으로 구동되고 있는 경우
+**✅ 양호**: 웹 프로세스(웹 서비스)가 관리자 권한이 부여된 계정이 아닌 운영에 필요한 최소한의 권한을 가진 별도의 계정으로 구동되고 있는 경우
 
 **❌ 취약**: 웹 프로세스(웹 서비스)가 관리자 권한이 부여된 계정으로 구동되고 있는 경우
 
@@ -54,125 +48,152 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### Apache
 
-**Step 1) envvars 파일 내 실행 계정을 관리자 계정이 아닌 별도의 계정으로 변경**
-
-# vi /[Apache 설치 디렉터리]/envvars export APACHE_RUN_USER=www-data export APACHE_RUN_GROUP=www-data
-
-**Step 2) Apache 서비스 파일 소유권 변경**
-
-# chown -R www-data:www-data /etc/apache2/ # chown -R www-data:www-data /var/www/ # chown -R www-data:www-data /var/log/apache2/
-
-**Step 3) 웹 서비스 실행 계정 로그인 제한 설정**
-
-# usermod -s /sbin/nologin [사용자명]
-
-**Step 4) Apache 재구동**
-
-# systemctl restart apache2 또는 httpd
+1.  **`envvars` 파일 내 실행 계정을 관리자 계정이 아닌 별도의 계정으로 변경**
+    ```bash
+    vi /[Apache 설치 디렉터리]/envvars
+    ```
+    ```bash
+    export APACHE_RUN_USER=www-data
+    export APACHE_RUN_GROUP=www-data
+    ```
+2.  **Apache 서비스 파일 소유권 변경**
+    ```bash
+    chown -R www-data:www-data /etc/apache2/
+    chown -R www-data:www-data /var/www/
+    chown -R www-data:www-data /var/log/apache2/
+    ```
+3.  **웹 서비스 실행 계정 로그인 제한 설정**
+    ```bash
+    usermod -s /sbin/nologin [사용자명]
+    ```
+4.  **Apache 재구동**
+    ```bash
+    systemctl restart apache2
+    # 또는 httpd
+    ```
 
 ### Tomcat
 
-**Step 1) tomcat.service 파일 내 Tomcat 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
-
-# vi /etc/systemd/system/tomcat.service
-
-**[Service]**
-
-User=tomcat Group=tomcat
-
-**Step 2) Tomcat 서비스 파일 소유권 변경**
-
-# chown -R tomcat:tomcat /[Tomcat 설치 디렉터리]/usr/share/tomcat9/ # chown -R tomcat:tomcat /[Tomcat 설치 디렉터리]/tomcat9/temp # chown -R tomcat:tomcat / [Tomcat 설치 디렉터리]/logs # chown -R tomcat:tomcat /usr/share/tomcat9/webapps # chown -R tomcat:tomcat /usr/share/tomcat9/work
-
-**Step 3) 웹서비스 실행 계정 로그인 제한 설정**
-
-# usermod -s /sbin/nologin [사용자명]
-
-**Step 4) Tomcat 서비스 재구동**
-
-# systemctl restart tomcat
+1.  **`tomcat.service` 파일 내 Tomcat 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
+    ```bash
+    vi /etc/systemd/system/tomcat.service
+    ```
+    ```ini
+    [Service]
+    User=tomcat
+    Group=tomcat
+    ```
+2.  **Tomcat 서비스 파일 소유권 변경**
+    ```bash
+    chown -R tomcat:tomcat /[Tomcat 설치 디렉터리]/usr/share/tomcat9/
+    chown -R tomcat:tomcat /[Tomcat 설치 디렉터리]/tomcat9/temp
+    chown -R tomcat:tomcat /[Tomcat 설치 디렉터리]/logs
+    chown -R tomcat:tomcat /usr/share/tomcat9/webapps
+    chown -R tomcat:tomcat /usr/share/tomcat9/work
+    ```
+3.  **웹서비스 실행 계정 로그인 제한 설정**
+    ```bash
+    usermod -s /sbin/nologin [사용자명]
+    ```
+4.  **Tomcat 서비스 재구동**
+    ```bash
+    systemctl restart tomcat
+    ```
 
 ### Nginx
 
-**Step 1) nginx.conf 파일 내 Nginx 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
-
-# vi /[Nginx 설치 디렉터리]/conf/nginx.conf User nginx nginx;
-
-**Step 2) Nginx 전용 계정 생성 및 Nginx 전용 그룹 추가**
-
-# adduser --system --no-create-home --shell /bin/false nginx # groupadd nginx && sudo usermod -aG nginx nginx
-
-**Step 3) 웹서비스 실행 계정 로그인 제한 설정**
-
-# usermod –s /sbin/nologin [사용자명]
-
-**Step 4) Nginx 서비스 재구동**
-
-# systemctl restart nginx
-
-03. 웹 서비스
+1.  **`nginx.conf` 파일 내 Nginx 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/conf/nginx.conf
+    ```
+    ```nginx
+    User nginx nginx;
+    ```
+2.  **Nginx 전용 계정 생성 및 Nginx 전용 그룹 추가**
+    ```bash
+    adduser --system --no-create-home --shell /bin/false nginx
+    groupadd nginx && sudo usermod -aG nginx nginx
+    ```
+3.  **웹서비스 실행 계정 로그인 제한 설정**
+    ```bash
+    usermod -s /sbin/nologin [사용자명]
+    ```
+4.  **Nginx 서비스 재구동**
+    ```bash
+    systemctl restart nginx
+    ```
 
 ### IIS
 
-**Step 1) 웹 사이트 응용프로그램 풀 이름 확인**
-
-제어판 > 관리 도구 > 인터넷 정보 서비스(IIS) 관리자 > 해당 웹 사이트 > 고급 설정 > ‘응용프로그램 풀 이름(DefaultAppPool)’ 확인
-
-**[ 응용프로그램 풀 이름 확인 ]**
-
-**Step 2) 웹 사이트 응용프로그램 풀 ID 확인**
-
-제어판 > 관리 도구 > 인터넷 정보 서비스(IIS) 관리자 > 응용프로그램 풀 > ‘응용프로그램 풀 이름(DefaultAppPool)’ 선택 > 고급 설정 > ID > 확인
-
-**[ 응용프로그램 풀 ID 확인 ]**
-
-**Step 3) 웹사이트 응용프로그램 풀 ID 설정**
-
-제어판 > 관리 도구 > 인터넷 정보 서비스(IIS) 관리자 > 응용프로그램 풀 > ‘용용 프로그램 풀 이름 (DefaultAppPool)’ 선택 > 고급 설정 > ID > ApplicationPoolIdentity 선택
-
-**[ 응용프로그램 풀 ID 설정 ]**
+1.  **웹 사이트 응용프로그램 풀 이름 확인**
+    -   `제어판` > `관리 도구` > `인터넷 정보 서비스(IIS) 관리자` > 해당 웹 사이트 > `고급 설정` > `응용프로그램 풀 이름(DefaultAppPool)` 확인
+    **[ 응용프로그램 풀 이름 확인 ]**
+2.  **웹 사이트 응용프로그램 풀 ID 확인**
+    -   `제어판` > `관리 도구` > `인터넷 정보 서비스(IIS) 관리자` > `응용프로그램 풀` > `응용프로그램 풀 이름(DefaultAppPool)` 선택 > `고급 설정` > `ID` > 확인
+    **[ 응용프로그램 풀 ID 확인 ]**
+3.  **웹사이트 응용프로그램 풀 ID 설정**
+    -   `제어판` > `관리 도구` > `인터넷 정보 서비스(IIS) 관리자` > `응용프로그램 풀` > `용용 프로그램 풀 이름 (DefaultAppPool)` 선택 > `고급 설정` > `ID` > `ApplicationPoolIdentity` 선택
+    **[ 응용프로그램 풀 ID 설정 ]**
 
 ### JEUS
 
-**Step 1) JEUS 데몬 구동 권한 확인**
-
-# ps–-ef |grep jeus jeus   25305   4223 99 09:54 pts/5   00:03:31 /usr/lib/jvm/java-11-openjdk-amd64/bin/java-DadminServer...
-
-**Step 2) JEUS 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
-
-# useradd –m jeus # mv /[JEUS 설치 디렉터리]/home/jeus
-
-**Step 3) [JEUS 설치 디렉터리] 소유자 및 그룹 소유자를 JEUS 계정으로 변경**
-
-# chown –R jeus:jeus /home/jeus/
+1.  **JEUS 데몬 구동 권한 확인**
+    ```bash
+    ps -ef | grep jeus
+    # jeus 25305 4223 99 09:54 pts/5 00:03:31 /usr/lib/jvm/java-11-openjdk-amd64/bin/java-DadminServer...
+    ```
+2.  **JEUS 데몬 구동 권한을 관리자 계정이 아닌 별도 계정으로 변경**
+    ```bash
+    useradd -m jeus
+    mv /[JEUS 설치 디렉터리]/home/jeus
+    ```
+3.  **[JEUS 설치 디렉터리] 소유자 및 그룹 소유자를 JEUS 계정으로 변경**
+    ```bash
+    chown -R jeus:jeus /home/jeus/
+    ```
 
 ### WebtoB
 
-**Step 1) 소유자 및 그룹 소유자 변경**
+1.  **소유자 및 그룹 소유자 변경**
+    ```bash
+    chown -R [WebtoB 전용 계정]:[WebtoB 전용 계정] /[WebtoB 디렉터리]
+    ```
+2.  **`http.m` 파일 내 기존 경로 변경**
+    -   `*NODE`절의 `WEBTOBDIR`, `DOCROOT`을 변경한 디렉터리로 설정
+    -   `*ALIAS`절의 `alias1`을 변경한 디렉터리로 설정
+    -   `*LOGGING`절의 `syslog`, `log1`, `log2`을 변경한 디렉터리로 설정
+    
+    설정 예시:
+    ```text
+    *NODE
+    imuser   WEBTOBDIR="/home/tmax/webtob/",
+             SHMKEY = 54000,
+             DOCROOT="/home/tmax/webtob/docs",
 
-chown –R [WebtoB 전용 계정]:[WebtoB 전용 계정] /[WebtoB 디렉터리]
+    *ALIAS
+    alias1   URI = "/cgi-bin/",
+             RealPath = "/home/webtob/webtob/cgi-bin/"
 
-**Step 2) http.m 파일 내 기존 경로 변경**
-
-*NODE절의 WEBTOBDIR, DOCROOT을 변경한 디렉터리로 설정 예시) *NODE imuser   WEBTOBDIR="/home/tmax/webtob/", SHMKEY = 54000, DOCROOT="/home/tmax/webtob/docs", *ALIAS절의 alias1을 변경한 디렉터리로 설정 예시) *ALIAS
-
-03. 웹 서비스
-
-alias1   URI = "/cgi-bin/", RealPath = "/home/webtob/webtob/cgi-bin/" *LOGGING절의 syslog, log1, log2을 변경한 디렉터리로 설정 예시) *LOGGING syslog   Format = "SYSLOG", FileName = "/home/tmax/webtob/log/system.log> Option = "sync" log1      Format = "DEFAULT", FileName = "/home/tmax/webtob/log/access.lo> Option = "sync" log2      Format = "ERROR", FileName = "/home/tmax/webtob/log/error.log_%> Option = "sync"
-
-**Step 3) 변경한 디렉터리명 환경변수에 추가**
-
-# export WEBTOB=/[WebtoB 디렉터리] # source ~/.bashrc
-
-**Step 4) libwbiconv.so 파일을 직접 /usr/lib로 복사**
-
-# cp /webtob/lib/libwbiconv.so /usr/lib/
-
-**Step 5) 라이브러리 캐시 업데이트**
-
-# ldconfig
-
-**Step 6) 설정 파일 컴파일**
-
-# wscfl –i http.m
+    *LOGGING
+    syslog   Format = "SYSLOG", FileName = "/home/tmax/webtob/log/system.log", Option = "sync"
+    log1     Format = "DEFAULT", FileName = "/home/tmax/webtob/log/access.log", Option = "sync"
+    log2     Format = "ERROR", FileName = "/home/tmax/webtob/log/error.log_%", Option = "sync"
+    ```
+3.  **변경한 디렉터리명 환경변수에 추가**
+    ```bash
+    export WEBTOB=/[WebtoB 디렉터리]
+    source ~/.bashrc
+    ```
+4.  **`libwbiconv.so` 파일을 직접 `/usr/lib`로 복사**
+    ```bash
+    cp /webtob/lib/libwbiconv.so /usr/lib/
+    ```
+5.  **라이브러리 캐시 업데이트**
+    ```bash
+    ldconfig
+    ```
+6.  **설정 파일 컴파일**
+    ```bash
+    wscfl -i http.m
+    ```
 

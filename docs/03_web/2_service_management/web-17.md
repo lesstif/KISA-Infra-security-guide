@@ -1,12 +1,10 @@
 # WEB-17: 웹 서비스 가상 디렉로리 삭제
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 중
 
 ---
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -25,9 +23,7 @@
 ### 참고
 
 !!! info "가상 디렉터리"
-    물리적으로 홈 디렉터리와 다른 위치에 있거나 홈 디렉터리에 종속된 디렉터리가
-
-아니어도 웹 브라우저를 통해 사용자가 접속할 때 웹사이트의 하위 디렉터리로 인식되도록 하는 기법
+    물리적으로 홈 디렉터리와 다른 위치에 있거나 홈 디렉터리에 종속된 디렉터리가 아니어도 웹 브라우저를 통해 사용자가 접속할 때 웹사이트의 하위 디렉터리로 인식되도록 하는 기법
 
 ## 점검 대상 및 판단 기준
 
@@ -53,39 +49,60 @@ Apache, Tomcat, Nginx, WebtoB
 
 ### Apache
 
-**Step 1) Alias 지시자 확인**
-
-# vi /[Apache 설치 디렉터리]/conf/httpd.conf(또는 apache2.conf) Alias /virtual /var/www/virtual <Directory /var/www/virtual> Options Indexes FollowSymLinks AllowOverride None Require all granted </Directory>
-
-**Step 2) 불필요한 가상 디렉터리 삭제**
-
-03. 웹 서비스
+1.  **Alias 지시자 확인**
+    ```bash
+    vi /[Apache 설치 디렉터리]/conf/httpd.conf # (또는 apache2.conf)
+    ```
+    ```apache
+    Alias /virtual /var/www/virtual
+    <Directory /var/www/virtual>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+    ```
+2.  **불필요한 가상 디렉터리 삭제**
 
 ### Tomcat
 
-**Step 1) ‘Context’ 블록 요소의 ‘path’ 속성값 확인**
-
-#vi /[Tomcat 설치 디렉터리]/server.xml <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true"> <Context path="/virtual" docBase="/path/to/your/virtual/directory" reloadable="true"/> </Host>
-
-**Step 2) Context 블록 요소 가상 디렉터리 제거**
+1.  **‘Context’ 블록 요소의 ‘path’ 속성값 확인**
+    ```bash
+    vi /[Tomcat 설치 디렉터리]/server.xml
+    ```
+    ```xml
+    <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">
+        <Context path="/virtual" docBase="/path/to/your/virtual/directory" reloadable="true"/>
+    </Host>
+    ```
+2.  **Context 블록 요소 가상 디렉터리 제거**
 
 ### Nginx
 
-**Step 1) Alias 지시자 확인**
-
-# vi /[Nginx  Dir]/nginx –v location /virtual { alias /var/www/virtual; index index.html index.htm; }
-
-**Step 2) 설정된 모든 디렉터리의 불필요한 Alias 지시자 제거**
-
-**Step 3) Nginx 재구동**
-
-# systemctl restart nginx
+1.  **Alias 지시자 확인**
+    ```bash
+    vi /[Nginx  Dir]/nginx –v
+    ```
+    ```nginx
+    location /virtual {
+        alias /var/www/virtual;
+        index index.html index.htm;
+    }
+    ```
+2.  **설정된 모든 디렉터리의 불필요한 Alias 지시자 제거**
+3.  **Nginx 재구동**
+    ```bash
+    systemctl restart nginx
+    ```
 
 ### WebtoB
 
-**Step 1) NODE절의 Alias 설정 확인**
-
-# vi /[WebtoB 설치 디렉터리]/config/http.m *ALIAS alias1          URI = “/cgi-bin/”, RealPath = “/home/tmax/webtob/cgi-bin/”
-
-**Step 2) NODE절의 불필요한 Alias 설정 삭제**
+1.  **NODE절의 Alias 설정 확인**
+    ```bash
+    vi /[WebtoB 설치 디렉터리]/config/http.m
+    ```
+    ```text
+    *ALIAS
+    alias1          URI = “/cgi-bin/”, RealPath = “/home/tmax/webtob/cgi-bin/”
+    ```
+2.  **NODE절의 불필요한 Alias 설정 삭제**
 

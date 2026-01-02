@@ -1,12 +1,10 @@
 # WEB-21: HTTP 리디렉션
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 중
 
 ---
-
-웹 서비스 > 3. 보안 설정
 
 ## 개요
 
@@ -50,79 +48,127 @@ HTTP Redirection 활성화 설정
 
 ### Apache
 
-**Step 1) SSL 모듈 활성화 확인**
-
-# apache2ctl -M | grep ssl
-
-**Step 1) SSL 인증서 활성화 설정**
-
-**Step 2) (미설치 시) mod_rewrite 설치**
-
-# apt install mod_ssl
-
-**Step 3) HTTP Redirection 설정 확인**
-
-# vi /[Apache 설치 디렉터리]/sites-available/default-ssl.conf <VirtualHost *:80> ServerName example.com Redirect permanent / https://example.com/ </VirtualHost>
-
-03. 웹 서비스
-
-**Step 4) SSL 가상 호스트 설정**
-
-# vi /[Apache 설치 디렉터리]/sites-available/default-ssl.conf <VirtualHost *:80> ServerAdmin webmaster@yourdomain.com ServerName yourdomain.com DocumentRoot /var/www/html RewriteEngine On RewriteCond %{HTTPS} off RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301] ErrorLog ${APACHE_LOG_DIR}/error.log CustomLog ${APACHE_LOG_DIR}/access.log combined </VirtualHost>
-
-**Step 5) SSL 가상 호스트 활성화 및 Apache 재구동**
-
-# vi sudo a2ensite default-ssl # systemctl restart apache2
+1.  **SSL 모듈 활성화 확인**
+    ```bash
+    apache2ctl -M | grep ssl
+    ```
+2.  **SSL 인증서 활성화 설정**
+    -   (미설치 시) mod_rewrite 설치
+    ```bash
+    apt install mod_ssl
+    ```
+3.  **HTTP Redirection 설정 확인**
+    ```bash
+    vi /[Apache 설치 디렉터리]/sites-available/default-ssl.conf
+    ```
+    ```apache
+    <VirtualHost *:80>
+        ServerName example.com
+        Redirect permanent / https://example.com/
+    </VirtualHost>
+    ```
+4.  **SSL 가상 호스트 설정**
+    ```bash
+    vi /[Apache 설치 디렉터리]/sites-available/default-ssl.conf
+    ```
+    ```apache
+    <VirtualHost *:80>
+        ServerAdmin webmaster@yourdomain.com
+        ServerName yourdomain.com
+        DocumentRoot /var/www/html
+        RewriteEngine On
+        RewriteCond %{HTTPS} off
+        RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+    ```
+5.  **SSL 가상 호스트 활성화 및 Apache 재구동**
+    ```bash
+    sudo a2ensite default-ssl
+    systemctl restart apache2
+    ```
 
 ### Nginx
 
-**Step 1) Server 블록 내 HTTPS Redirection 설정 확인**
-
-# vi /[Nginx 설치 디렉터리]/sites-available/default server { listen 80; server_name yourdomain.com www.yourdomain.com; return 301 https://$host$request_uri; }
-
-**Step 2) SSL 활성화 설정**
-
-# vi /[Nginx 설치 디렉터리]/sites-available/default server { listen 80; server_name mydomain.com www.mydomain.com; return 301 https://$host$request_uri; }
-
-**Step 3) Nginx 재구동**
-
-# systemctl restart nginx
+1.  **Server 블록 내 HTTPS Redirection 설정 확인**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/sites-available/default
+    ```
+    ```nginx
+    server {
+        listen 80;
+        server_name yourdomain.com www.yourdomain.com;
+        return 301 https://$host$request_uri;
+    }
+    ```
+2.  **SSL 활성화 설정**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/sites-available/default
+    ```
+    ```nginx
+    server {
+        listen 80;
+        server_name mydomain.com www.mydomain.com;
+        return 301 https://$host$request_uri;
+    }
+    ```
+3.  **Nginx 재구동**
+    ```bash
+    systemctl restart nginx
+    ```
 
 ### IIS
 
-**Step 1) SSL 인증서 활성화**
-
-SSL 인증서 등록 과정에서 사이트 바인딩 ‘종류’를 HTTPS로 설정
-
-**[ 사이트 바인딩 확인 ]**
-
-**Step 2) 등록된 SSL 인증서 바인딩 설정 확인**
-
-제어판 > 관리 도구 > IIS(인터넷 정보 서비스) 관리자 > 해당 웹사이트 > [사이트 바인딩] > [편집] 탭 > SSL 인증서 확인
-
-**Step 3) IIS 서버 재구동**
+1.  **SSL 인증서 활성화**
+    -   SSL 인증서 등록 과정에서 사이트 바인딩 ‘종류’를 HTTPS로 설정
+    **[ 사이트 바인딩 확인 ]**
+2.  **등록된 SSL 인증서 바인딩 설정 확인**
+    -   `제어판` > `관리 도구` > `IIS(인터넷 정보 서비스) 관리자` > 해당 웹사이트 > [사이트 바인딩] > [편집] 탭 > SSL 인증서 확인
+3.  **IIS 서버 재구동**
 
 ### WebtoB
 
-**Step 1) Server 설정 파일 NODE절 vhost의 URLRewrite, URLRewriteConfig 설정 확인**
-
-# vi /[WebtoB 설치 디렉터리]/config/http.m *VHOST vhost1 ... URLRewrite = Y, URLRewriteConfig = "config/rewrite_ssl.conf",
-
-03. 웹 서비스
-
-**Step 2) Server 설정 파일 NODE절 vhost의 URLRewrite, URLRewriteConfig 설정**
-
-# vi /[WebtoB 설치 디렉터리]/config/http.m *VHOST vhost1 ... URLRewrite = Y, URLRewriteConfig = "config/rewrite_ssl.conf",
-
-**Step 3) URLRewriteConfig 파일에서 Redirection 확인**
-
-# vi /[WebtoB 설치 디렉터리]/config/rewrite_ssel.conf RewriteCond %{HTTPS} off RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=307,L]
-
-**Step 4) URLRewriteConfig 파일에서 Redirection 설정**
-
-# vi /[WebtoB 설치 디렉터리]/config/rewrite_ssel.conf RewriteCond %{HTTPS} off RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=307,L]
-
-**Step 5) 설정 파일 컴파일 및 재구동**
-
-# wscfl -I http.m # wsdown # wsboot
+1.  **Server 설정 파일 NODE절 vhost의 URLRewrite, URLRewriteConfig 설정 확인**
+    ```bash
+    vi /[WebtoB 설치 디렉터리]/config/http.m
+    ```
+    ```text
+    *VHOST
+    vhost1 ...
+    URLRewrite = Y,
+    URLRewriteConfig = "config/rewrite_ssl.conf",
+    ```
+2.  **Server 설정 파일 NODE절 vhost의 URLRewrite, URLRewriteConfig 설정**
+    ```bash
+    vi /[WebtoB 설치 디렉터리]/config/http.m
+    ```
+    ```text
+    *VHOST
+    vhost1 ...
+    URLRewrite = Y,
+    URLRewriteConfig = "config/rewrite_ssl.conf",
+    ```
+3.  **URLRewriteConfig 파일에서 Redirection 확인**
+    ```bash
+    vi /[WebtoB 설치 디렉터리]/config/rewrite_ssel.conf
+    ```
+    ```text
+    RewriteCond %{HTTPS} off
+    RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=307,L]
+    ```
+4.  **URLRewriteConfig 파일에서 Redirection 설정**
+    ```bash
+    vi /[WebtoB 설치 디렉터리]/config/rewrite_ssel.conf
+    ```
+    ```text
+    RewriteCond %{HTTPS} off
+    RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=307,L]
+    ```
+5.  **설정 파일 컴파일 및 재구동**
+    ```bash
+    wscfl -I http.m
+    wsdown
+    wsboot
+    ```
 

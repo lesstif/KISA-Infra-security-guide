@@ -1,12 +1,10 @@
 # WEB-07: 웹 서비스 경로 내 불필요한 파일 제거
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 중
 
 ---
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -51,43 +49,54 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### Apache
 
-**Step 1) rm 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+1.  **`rm` 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+    ```bash
+    rm -rf /<Apache 설치 디렉터리>/htdocs/manual
+    rm -rf /<Apache 설치 디렉터리>/manual
+    ```
 
-# rm –rf /<Apache 설치 디렉터리>/htdocs/manual # rm –rf /<Apache 설치 디렉터리>/manual
-
-!!! info "2.4 버전 이상은 htdocs 디렉터리가 기본 제공되지 않으므로 /var/www/html 사용"
+!!! info "참고"
+    2.4 버전 이상은 htdocs 디렉터리가 기본 제공되지 않으므로 `/var/www/html` 사용
 
 ### Tomcat
 
-**Step 1) rm 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+1.  **`rm` 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+    ```bash
+    rm -rf /<Tomcat 설치 디렉터리>/webapps/docs/<불필요 파일>
+    ```
 
-# rm –rf  /<Tomcat 설치 디렉터리>/webapps/docs/<불필요 파일>
-
-!!! info "BUILDING.txt, RELEASE-NOTES.txt, jndi-resources-howto.html 등 매뉴얼 파일 포함"
-
-03. 웹 서비스
+!!! info "참고"
+    BUILDING.txt, RELEASE-NOTES.txt, jndi-resources-howto.html 등 매뉴얼 파일 포함
 
 ### Nginx
 
-**Step 1) rm 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
-
-# rm –rf /<Nginx 설치 디렉터리>/html/index.html
+1.  **`rm` 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+    ```bash
+    rm -rf /<Nginx 설치 디렉터리>/html/index.html
+    ```
 
 ### IIS
 
-**Step 1) 샘플 디렉터리 존재여부 확인 및 제거**
-
-샘플 디렉터리 경로 예시 c:\inetpub\iissamples c:\winnt\help\iishelp c:\program files\common files\system\msadc\sample %SystemRoot%\System32\Inetsrv\IISADMPWD
+1.  **샘플 디렉터리 존재여부 확인 및 제거**
+    -   샘플 디렉터리 경로 예시:
+        -   `c:\inetpub\iissamples`
+        -   `c:\winnt\help\iishelp`
+        -   `c:\program files\common files\system\msadc\sample`
+        -   `%SystemRoot%\System32\Inetsrv\IISADMPWD`
 
 ### JEUS
 
-**Step 1) rm 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
-
-# rm –rf /<JEUS 설치 디렉터리>/docs/manuals/default/web-manager/<불필요 파일> # rm –rf /<JEUS 홈 디렉터리>/samples/ <불필요 파일>
+1.  **`rm` 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+    ```bash
+    rm -rf /<JEUS 설치 디렉터리>/docs/manuals/default/web-manager/<불필요 파일>
+    rm -rf /<JEUS 홈 디렉터리>/samples/<불필요 파일>
+    ```
 
 ### WebtoB
 
-**Step 1) rm 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
-
-# rm –rf /<WebtoB 설치 디렉터리>/docs/manuals/<불필요 파일> # rm –rf /<WebtoB 홈 디렉터리>/samples/ <불필요 파일>
+1.  **`rm` 명령어로 확인된 불필요한 매뉴얼 디렉터리 및 파일 제거**
+    ```bash
+    rm -rf /<WebtoB 설치 디렉터리>/docs/manuals/<불필요 파일>
+    rm -rf /<WebtoB 홈 디렉터리>/samples/<불필요 파일>
+    ```
 

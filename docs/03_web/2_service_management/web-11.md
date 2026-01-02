@@ -1,14 +1,10 @@
 # WEB-11: 웹 서비스 경로 설정
 
-**분류**: 03_web
+**분류**: Web Service
 
 **중요도**: 중
 
 ---
-
-03. 웹 서비스
-
-웹 서비스 > 2. 서비스 관리
 
 ## 개요
 
@@ -52,39 +48,47 @@ Apache, Tomcat, Nginx, IIS, JEUS, WebtoB
 
 ### Apache
 
-**Step 1) apache2.conf (또는 /conf/httpd.conf) 파일 내 DocumentRoot를 별도의 경로로 변경**
-
-DocumentRoot [별도의 경로]
+1.  **`apache2.conf` (또는 `/conf/httpd.conf`) 파일 내 `DocumentRoot`를 별도의 경로로 변경**
+    ```apache
+    DocumentRoot [별도의 경로]
+    ```
 
 ### Tomcat
 
-**Step 1) web.xml 파일 내 docBase를 별도의 경로로 변경**
-
-<Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true"> <Context path="" docBase="[별도의 경로]" /> </Host>
+1.  **`web.xml` 파일 내 `docBase`를 별도의 경로로 변경**
+    ```xml
+    <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">
+        <Context path="" docBase="[별도의 경로]" />
+    </Host>
+    ```
 
 ### Nginx
 
-**Step 1) sites-available 파일 내 DocumentRoot를 별도의 경로로 변경**
-
-# vi /[Nginx 설치 디렉터리]/sites-available root [별도의 경로]
+1.  **`sites-available` 파일 내 `DocumentRoot`를 별도의 경로로 변경**
+    ```bash
+    vi /[Nginx 설치 디렉터리]/sites-available
+    ```
+    ```nginx
+    root [별도의 경로];
+    ```
 
 ### IIS
 
-**Step 1) 기본 디렉터리 확인**
-
-시작 > Windows 관리 도구 > 인터넷 정보 서비스(IIS) 관리자 > 해당 웹 사이트 > 사이트 편집 > 기본 설정 > “실제 경로”를 별도의 경로로 변경
-
-**[ 루트 디렉터리 경로 확인 ]**
+1.  **기본 디렉터리 확인**
+    -   `시작` > `Windows 관리 도구` > `인터넷 정보 서비스(IIS) 관리자` > 해당 웹 사이트 > `사이트 편집` > `기본 설정` > "실제 경로"를 별도의 경로로 변경
+    **[ 루트 디렉터리 경로 확인 ]**
 
 ### JEUS
 
-**Step 1) ws_engine.m 파일 내 Docroot을 별도의 경로로 변경**
+1.  **`ws_engine.m` 파일 내 `Docroot`을 별도의 경로로 변경**
+    ```xml
+    Docroot = “[별도의 경로]”
+    ```
 
-Docroot = “[별도의 경로]”
+### WebtoB
 
-###  WebtoB
-
-**Step 1) http.m 파일 내 DOCROOT를 별도의 경로로 변경**
-
-DOCROOT="[별도의 경로]",
+1.  **`http.m` 파일 내 `DOCROOT`를 별도의 경로로 변경**
+    ```text
+    DOCROOT="[별도의 경로]",
+    ```
 
