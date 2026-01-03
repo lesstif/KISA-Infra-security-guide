@@ -1,0 +1,1986 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="주요정보통신기반시설 기술적 취약점 분석·평가 방법 상세가이드">
+      
+      
+        <meta name="author" content="KISA(한국 인터넷진흥원)">
+      
+      
+        <link rel="canonical" href="https://lesstif.github.io/KISA-Infra-security-guide/10_webapp/general/01-ci/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>CI: 1. 코드 인젝션 (Code Injection) - KISA 기술적 취약점 분석·평가 상세가이드</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ci-1-code-injection" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="KISA 기술적 취약점 분석·평가 상세가이드" class="md-header__button md-logo" aria-label="KISA 기술적 취약점 분석·평가 상세가이드" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KISA 기술적 취약점 분석·평가 상세가이드
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CI: 1. 코드 인젝션 (Code Injection)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lesstif/KISA-Infra-security-guide" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lesstif/KISA-Infra-security-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  홈
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../01_unix/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  01. Unix
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../02_windows/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  02. Windows
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../03_web/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  03. Web
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../04_security/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  04. Security
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../05_network/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  05. Network
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../06_control/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  06. Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../07_pc/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  07. PC
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../08_dbms/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  08. DBMS
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../09_mobile/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  09. Mobile
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  10. WebApp
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../11_virtualization/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  11. Virtual
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../12_cloud/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  12. Cloud
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="KISA 기술적 취약점 분석·평가 상세가이드" class="md-nav__button md-logo" aria-label="KISA 기술적 취약점 분석·평가 상세가이드" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KISA 기술적 취약점 분석·평가 상세가이드
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lesstif/KISA-Infra-security-guide" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lesstif/KISA-Infra-security-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01_unix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01. Unix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02_windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02. Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03_web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03. Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../04_security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04. Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../05_network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05. Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../06_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06. Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../07_pc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07. PC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../08_dbms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08. DBMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../09_mobile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09. Mobile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../11_virtualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Virtual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../12_cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개요
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="개요">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 내용
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 목적
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보안 위협
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 대상 및 판단 기준
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="점검 대상 및 판단 기준">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        대상
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        판단 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="조치 방법">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 시 영향
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 및 조치 사례
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="점검 및 조치 사례">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ldaplightweght-directory-access-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LDAP(Lightweght Directory Access Protocol) 인젝션
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LDAP(Lightweght Directory Access Protocol) 인젝션">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영체제 명령실행
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="운영체제 명령실행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssiserver-side-includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSI(Server Side Includes) 인젝션
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSI(Server Side Includes) 인젝션">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        심화 공격 수행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XPath 인젝션
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="XPath 인젝션">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        심화 공격 수행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xxexml-external-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XXE(XML External Entities) 인젝션
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="XXE(XML External Entities) 인젝션">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        비활성화 코드 예시
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sstiserver-side-template-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSTI(Server Side Template Injection)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSTI(Server Side Template Injection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점검 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        심화 공격 수행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조치 예
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="조치 예">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java Velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-freemarker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java FreeMarker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ASP.NET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-jinja2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        python (jinja2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PHP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ci-1-code-injection">CI: 1. 코드 인젝션 (Code Injection)</h1>
+<p><strong>분류</strong>: Web Application(웹)</p>
+<p><strong>중요도</strong>: 상</p>
+<hr />
+<h2 id="_1">개요</h2>
+<h3 id="_2">점검 내용</h3>
+<p>웹 애플리케이션 내 다양한 인젝션 공격(LDAP, 운영체제 명령 실행, SSI, XPATH, XML, SSTI 인젝션 등)에 대해 외부 입력값이 쿼리나 명령어로 삽입되어 비인가된 접근이나 코드 실행의 가능 유무 점검</p>
+<h3 id="_3">점검 목적</h3>
+<p>허용되지 않은 코드 및 쿼리 실행을 방지하여 비인가된 접근, 데이터 유출, 시스템 변조, 악성 코드 실행 등의 위협을 차단하여, 데이터 보호와 시스템 안정성을 확보하기 위함</p>
+<h3 id="_4">보안 위협</h3>
+<p>해당 취약점이 존재하는 경우 비인가된 데이터 접근으로 민감 정보가 탈취될 수 있으며, 시스템 명령어나 스크립트가 실행되어 서버 제어나 악성 코드 실행이 가능하고, 데이터 무결성이 훼손되어 정보의 신뢰성이 떨어지며, 서비스 거부 공격(DoS)으로 시스템 가용성이 저하될 수 있음. 따라서 "|", ";", "`", "&lt;" 등의 특수 문자에 대한 필터링 구현과 함께 입력값 검증, 화이트리스트 적용 등의 추가적인 보안 조치가 필요함</p>
+<h3 id="_5">참고</h3>
+<div class="admonition info">
+<p class="admonition-title">LDAP 인젝션</p>
+<p>입력값이 LDAP(Lightweight Directory Access Protocol) 쿼리에 삽입되어 디렉터리 서비스 데이터에 대한 비인가된 조회, 수정, 삭제를 유발하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">운영체제 명령 실행</p>
+<p>입력값이 시스템 명령어로 실행되어 서버의 운영체제 명령을 비인가로 수행하거나 민감한 시스템 정보를 노출하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">SSI 인젝션</p>
+<p>입력값이 서버 사이드 인클루드(Server Side Include) 명령어로 실행되어 웹 애플리케이션 서버에서 비인가된 스크립트 실행이나 파일 접근을 유발하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">XPath 인젝션</p>
+<p>입력값이 XPath 쿼리에 삽입되어 XML 데이터의 비인가된 조회, 추가, 삭제를 유발하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">XXE 인젝션</p>
+<p>입력값이 XML 문서나 쿼리에 삽입되어 XML 데이터에 대한 비인가된 접근, 외부 엔티티 참조(XML External Entities)를 통한 시스템 정보 유출을 유발하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">SSTI 인젝션</p>
+<p>입력값이 서버 사이드 템플릿 엔진에 삽입되어 템플릿 렌더링 과정에서 비인가된 코드 실행이나 서버 내부 데이터 노출을 유발하는 공격</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">소스코드 및 취약점 점검 필요</p>
+</div>
+<h2 id="_6">점검 대상 및 판단 기준</h2>
+<h3 id="_7">대상</h3>
+<p>웹 애플리케이션 소스코드, 웹 방화벽</p>
+<h3 id="_8">판단 기준</h3>
+<p><strong>✅ 양호</strong>: 임의의 입력값에 대하여 철저한 검증이 이루어져, 허용되지 않은 값이 필터링되고 허용된 값만</p>
+<p>처리되는 경우</p>
+<p><strong>❌ 취약</strong>: 임의의 입력값에 대하여 검증 없이 명령이 실행되는 경우</p>
+<h2 id="_9">조치 방법</h2>
+<p>화이트리스트 방식으로 쿼리를 허용된 값만 처리하고, 특수 문자에 대해 입력값 검증</p>
+<h3 id="_10">조치 시 영향</h3>
+<p>일반적인 경우 영향 없음</p>
+<h2 id="_11">점검 및 조치 사례</h2>
+<h3 id="ldaplightweght-directory-access-protocol">LDAP(Lightweght Directory Access Protocol) 인젝션</h3>
+<h4 id="_12">점검 방법</h4>
+<ol>
+<li>사용자 입력값에 대하여 변조된 LDAP 쿼리 삽입 후 실행 가능 여부 확인
+<img alt="LDAP 쿼리 삽입" src="../../../images/10_webapp/webapp-006.jpg" title="LDAP 쿼리 삽입" /></li>
+</ol>
+<h4 id="_13">조치 방법</h4>
+<ol>
+<li>사용자 입력값을 화이트리스트로 지정하여 영문(a-z, A-Z)과 숫자(0-9)만을 허용</li>
+<li>특수문자를 사용해야 하는 경우 입력값(DN에 사용되는 특수문자는 '\'를 붙여 이스케이프 처리, 필터에 사용되는 특수문자는 '= + &lt; &gt; # \ , ; 앞뒤 공백' 등)에 대해서는 실행 명령이 아닌 일반문자로 인식되도록 처리</li>
+<li>DN과 필터에 사용되는 사용자 입력값에는 특수문자 제거</li>
+<li>웹 방화벽에 LDAP 관련 특수문자를 필터링하도록 룰셋 적용</li>
+</ol>
+<p><strong>특수문자 필터링 예시</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">변경전</th>
+<th style="text-align: center;"><code>\</code></th>
+<th style="text-align: center;"><code>=</code></th>
+<th style="text-align: center;"><code>+</code></th>
+<th style="text-align: center;"><code>*</code></th>
+<th style="text-align: center;"><code>(</code></th>
+<th style="text-align: center;"><code>)</code></th>
+<th style="text-align: center;"><code>\0</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">변경후</td>
+<td style="text-align: center;"><code>\5c</code></td>
+<td style="text-align: center;"><code>\3d</code></td>
+<td style="text-align: center;"><code>\2b</code></td>
+<td style="text-align: center;"><code>\2a</code></td>
+<td style="text-align: center;"><code>\28</code></td>
+<td style="text-align: center;"><code>\29</code></td>
+<td style="text-align: center;"><code>\00</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>필터링 대상 예시</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">'</th>
+<th style="text-align: center;">"</th>
+<th style="text-align: center;">-</th>
+<th style="text-align: center;">#</th>
+<th style="text-align: center;">(</th>
+<th style="text-align: center;">)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: center;"><code>=</code></td>
+<td style="text-align: center;"><code>/*</code></td>
+<td style="text-align: center;"><code>*/</code></td>
+<td style="text-align: center;"><code>+</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>;</code></td>
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: center;"><code>\|</code></td>
+<td style="text-align: center;"><code>\</code></td>
+<td style="text-align: center;"><code>\0</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>:</code></td>
+<td style="text-align: center;"><code>`</code></td>
+<td style="text-align: center;"><code>%</code></td>
+<td style="text-align: center;">user_tables</td>
+<td style="text-align: center;">table_name</td>
+<td style="text-align: center;">column_name</td>
+</tr>
+<tr>
+<td style="text-align: center;">Syscolumns</td>
+<td style="text-align: center;">union</td>
+<td style="text-align: center;">select</td>
+<td style="text-align: center;">insert</td>
+<td style="text-align: center;">drop</td>
+<td style="text-align: center;">update</td>
+</tr>
+<tr>
+<td style="text-align: center;">and</td>
+<td style="text-align: center;">or</td>
+<td style="text-align: center;">If</td>
+<td style="text-align: center;">join</td>
+<td style="text-align: center;">substring</td>
+<td style="text-align: center;">from</td>
+</tr>
+<tr>
+<td style="text-align: center;">where</td>
+<td style="text-align: center;">declare</td>
+<td style="text-align: center;">substr</td>
+<td style="text-align: center;">openrowset</td>
+<td style="text-align: center;">xp_</td>
+<td style="text-align: center;">sysobject</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">운영체제 명령실행</h3>
+<h4 id="_15">점검 방법</h4>
+<ol>
+<li>웹 애플리케이션 기능 내 전달되는 파라미터 값에 대하여 운영체제 명령어 삽입 후 실행 여부 확인
+<img alt="임의 운영체제 명령어 삽입" src="../../../images/10_webapp/webapp-008.jpg" title="임의 운영체제 명령어 삽입" /></li>
+</ol>
+<h4 id="_16">조치 방법</h4>
+<ol>
+<li>웹 애플리케이션 설계 시 운영체제로부터 명령어를 직접적으로 호출하지 않도록 구현하고, 언어/프레임워크에서 제공하는 안전한 API 사용</li>
+<li>명령어를 직접 호출하는 기능이 필요한 경우에는, 데이터가 OS의 명령어 해석기에 전달되기 전에 화이트리스트 기반으로 입력값을 검증/확인하도록 구현</li>
+<li>입력값에 대한 파라미터 데이터의 필터링 처리<ul>
+<li>Unix/Linux :　&amp;, &amp;&amp;, |, ||, ;, `, $(), &lt;, &gt; 등 </li>
+<li>Windows : &amp;, |, ^, % 등</li>
+</ul>
+</li>
+<li>웹 서버 및 웹 애플리케이션 서버는 공개적으로 알려진 취약점이 제거된 상위 버전으로 업데이트<ul>
+<li>KISA 보호나라&amp;KrCERT/CC 알림마당 &gt; 보안공지(<a href="https://www.boho.or.kr/kr/bbs/list.do?menuNo=205020&amp;bbsId=B0000133">www.boho.or.kr</a>)</li>
+</ul>
+</li>
+<li>웹 방화벽에 모든 사용자 입력값을 대상으로 악용될 수 있는 특수문자 및 키워드 등에 대한 룰셋 적용</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">특수문자 필터링 처리 문자 설명</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">구분</th>
+<th style="text-align: left;">상세 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: left;">첫 번째 명령어는 백그라운드에서 실행되며, 두 번째 명령어는 즉시 실행</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>&amp;&amp;</code></td>
+<td style="text-align: left;">첫 번째 명령어가 성공했을 때만 두 번째 명령어 실행</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>\|</code></td>
+<td style="text-align: left;">두 명령어를 연결하여, 첫 번째 명령어의 출력을 두 번째 명령어의 입력으로 전달</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>;</code></td>
+<td style="text-align: left;">첫 번째 명령어 실행 후 성공여부와 무관하게 두 번째 명령어 실행</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>` `</code> 또는 <code>$()</code></td>
+<td style="text-align: left;">백틱 또는 괄호 안에 있는 명령어를 실행하고 그 출력을 반환</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>&gt;</code> 또는 <code>&gt;&gt;</code></td>
+<td style="text-align: left;">명령 실행 결과를 파일로 생성(덮어쓰기 또는 추가)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: left;">파일 내용을 명령어 입력으로 전달</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>^ (Windows)</code></td>
+<td style="text-align: left;">명령어 이스케이프/제어 문자로 사용</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>% (Windows)</code></td>
+<td style="text-align: left;">환경 변수 치환</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>\</code></td>
+<td style="text-align: left;">이스케이프 문자 또는 뒤에 오는 특수문자를 무효화하거나 명령 연결 시 사용</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ssiserver-side-includes">SSI(Server Side Includes) 인젝션</h3>
+<h4 id="_17">점검 방법</h4>
+<ol>
+<li>사용자가 입력 가능한 파라미터 값에 아래를 삽입하여 전송 후 반환되는 페이지에 사이트의 홈 디렉터리가 표시되는지 확인
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;!--#echo var=&quot;DOCUMENT_ROOT&quot; --&gt;
+</code></pre></div>
+<img alt="Server Side Includes 지시어 삽입 및 취약점 유무 판단" src="../../../images/10_webapp/webapp-011.jpg" title="Server Side Includes 지시어 삽입 및 취약점 유무 판단" /></li>
+<li>사용자가 입력 가능한 파라미터 값에 아래를 삽입하여 전송 후 반환되는 페이지에 디렉터리의 파일 리스트가 표시되는지 확인
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;!-- #exec cmd=&quot;ls -al&quot; --&gt;
+</code></pre></div></li>
+</ol>
+<h4 id="_18">심화 공격 수행</h4>
+<ol>
+<li>HTTP 요청(Request) 헤더에 명령어를 삽입하여 실행되는지 확인
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>GET / HTTP/1.0 
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Referer: &lt;!--#exec cmd=&quot;/bin/ps ax&quot;--&gt; 
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>User-Agent: &lt;!--#include virtual=&quot;/proc/version&quot;--&gt;
+</code></pre></div></li>
+</ol>
+<h4 id="_19">조치 방법</h4>
+<ol>
+<li>화이트리스트 방식으로 사용자 입력에 대한 사용 가능한 문자들을 정의하여 정해진 문자를 제외한 나머지 모든 문자들을 필터링 처리</li>
+<li>필터링 해야 하는 대상은 GET 질의 문자열, POST 데이터, 쿠키, URL, 그리고 일반적으로 브라우저와 웹 서버가 주고받는 모든 데이터를 포함하며, 아래는 특수문자에 대한 엔티티 형태를 표시한 것임</li>
+<li>웹 서버의 SSI 기능을 사용하지 않거나, 웹 방화벽에 특수문자를 필터링하도록 룰셋 적용</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">변경 전</th>
+<th style="text-align: center;"><code>&lt;</code></th>
+<th style="text-align: center;"><code>&gt;</code></th>
+<th style="text-align: center;"><code>"</code></th>
+<th style="text-align: center;"><code>(</code></th>
+<th style="text-align: center;"><code>)</code></th>
+<th style="text-align: center;"><code>#</code></th>
+<th style="text-align: center;"><code>&amp;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>변경 후</strong></td>
+<td style="text-align: center;"><code>&amp;lt;</code></td>
+<td style="text-align: center;"><code>&amp;gt;</code></td>
+<td style="text-align: center;"><code>&amp;quot;</code></td>
+<td style="text-align: center;"><code>&amp;#40;</code></td>
+<td style="text-align: center;"><code>&amp;#41;</code></td>
+<td style="text-align: center;"><code>&amp;#35;</code></td>
+<td style="text-align: center;"><code>&amp;amp;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="xpath">XPath 인젝션</h3>
+<h4 id="_20">점검 방법</h4>
+<ol>
+<li>취약점 존재 유무 판단을 위한 Xpath 쿼리(' or '1'='1, ' and 'a' = 'b 등) 삽입
+    !!! info "예시로 제시한 것으로, 웹 사이트 환경에 맞춰 점검해야 함"
+    <img alt="XPath 구문 삽입 시도 및 취약점 유무 판단" src="../../../images/10_webapp/webapp-006.jpg" title="XPath 구문 삽입 시도 및 취약점 유무 판단" /></li>
+<li>추가적인 쿼리 질의를 통하여 데이터 추출 등의 타당성 검토
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&#39; or count(parent::*[position()=1])=0 or &#39;a&#39;=&#39;b 1&#39; or 
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>string-length(username)=[COUNT] and &#39;1&#39;=&#39;1... 등
+</code></pre></div></li>
+</ol>
+<h4 id="_21">심화 공격 수행</h4>
+<h4 id="_22">조치 방법</h4>
+<ol>
+<li>XPath 쿼리에 사용자가 값을 입력할 수 있는 경우, 입력값 검증을 통해 필요 문자만을 받아들이게 함, [ ]: , * / 등의 오동작를 유발하는 특수문자는 제한하며, 특정 특수문자만을 필터링하는 것이 아닌 허용된 문자 이외의 모든 입력을 화이트리스트 방식으로 필터링 처리</li>
+<li>Xpath 및 XQuery의 쿼리 삽입 시 사용되는 특수문자를 필터링하도록 웹 방화벽 룰셋 적용</li>
+</ol>
+<h3 id="xxexml-external-entities">XXE(XML External Entities) 인젝션</h3>
+<h4 id="_23">점검 방법</h4>
+<ol>
+<li>
+<p>파일 업로드 페이지, API 엔드포인트, HTML Form 등 XML을 파싱하는 페이지 포인트 내 XML 객체 삽입 시도</p>
+<blockquote>
+<p>[!NOTE]
+예시로 제시한 것으로, 웹 사이트 환경에 맞춰 점검해야 함</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; 
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&lt;!DOCTYPE foo [ 
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    &lt;!ELEMENT foo ANY &gt; 
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    &lt;!ENTITY xxe SYSTEM &quot;file:///C:/Windows/System32/drivers/etc/hosts&quot; &gt; ]&gt; 
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>&lt;foo&gt;&amp;xxe;&lt;/foo&gt;
+</code></pre></div>
+</li>
+</ol>
+<p><img alt="외부 Entity 객체 삽입 및 XXE 공격 수행" src="../../../images/10_webapp/webapp-018.jpg" title="외부 Entity 객체 삽입 및 XXE 공격 수행" /></p>
+<h4 id="_24">조치 방법</h4>
+<ol>
+<li>허용된 태그와 속성만 사용하도록 화이트리스트 방식을 이용한 입력값 검증 로직 구현</li>
+<li>최근 언어별 XML 파서의 경우, 기본적으로 외부 엔티티 처리가 비활성화되어 있으나 소스코드 상에서 명시적으로 비활성화 처리하는 것이 안전한 방법</li>
+<li>의도하지 않은 오동작이 발생할 가능성이 존재하는 외부 엔티티 참조 명령어 및 주요 스키마 등에 대하여 웹 방화벽에 룰셋 적용</li>
+</ol>
+<h4 id="_25">비활성화 코드 예시</h4>
+<ul>
+<li>
+<p>Java DTD(외부 엔티티) 비활성화 예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// 공통 보안 설정</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">dbf</span><span class="p">.</span><span class="na">setXIncludeAware</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">///...</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SecurityMode</span><span class="p">.</span><span class="na">FULL_SECURE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://xml.org/sax/features/external-general-entities&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://xml.org/sax/features/external-parameter-entities&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://apache.org/xml/features/nonvalidating/load-external-dtd&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">    </span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SecurityMode</span><span class="p">.</span><span class="na">LIMITED_SECURE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="c1">// DTD를 완전히 비활성화할 수 없는 경우</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://xml.org/sax/features/external-general-entities&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://xml.org/sax/features/external-parameter-entities&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">dbf</span><span class="p">.</span><span class="na">setFeature</span><span class="p">(</span><span class="s">&quot;http://apache.org/xml/features/nonvalidating/load-external-dtd&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>ASP.NET DTD(외부 엔티티) 비활성화 예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>//<span class="w"> </span>XmlDocument<span class="w"> </span>객체<span class="w"> </span>생성
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>XmlDocument<span class="w"> </span>doc<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>XmlDocument();
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>//<span class="w"> </span>XmlResolver를<span class="w"> </span>null로<span class="w"> </span>설정하여<span class="w"> </span>외부<span class="w"> </span>엔티티의<span class="w"> </span>해석을<span class="w"> </span>비활성화
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>doc.XmlResolver<span class="w"> </span>=<span class="w"> </span>null
+</code></pre></div></p>
+</li>
+<li>
+<p>PHP 8.0 이전 DTD(외부 엔티티) 비활성화 예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="x">libxml_disable_entity_loader(true);</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>PHP 8.0 이전 DTD(외부 엔티티) 비활성화 예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="x">// DOMDocument 인스턴스 생성</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="x">$dom = new DOMDocument();</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="x">// 외부 엔티티 비활성화</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="x">$dom-&gt;loadXML($xmlfile, LIBXML_NONET);</span>
+</code></pre></div></p>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">PHP 8.0 이후</p>
+<p>libxml_disable_entity_loader() 함수가 더 이상 사용되지 않으며, 외부 엔티티 로드는 기본적으로 비활성화되 어있지만, LIBXML_NOENT 플래그로 인하여 XML 파서가 외부 엔티티를 확장하도록 설정되어있는 경우 X XE 취약점 발생 가능</p>
+</div>
+<h3 id="sstiserver-side-template-injection">SSTI(Server Side Template Injection)</h3>
+<h4 id="_26">점검 방법</h4>
+<ol>
+<li>사용자 입력값이 서버 템플릿 엔진 내에서 처리되는지 확인하기 위해 {{7*7}} 등의 수식 삽입 시도
+<img alt="템플릿 엔진 수식 삽입을 통한 취약점 유무 판단" src="../../../images/10_webapp/webapp-022.jpg" title="템플릿 엔진 수식 삽입을 통한 취약점 유무 판단" /></li>
+<li>상위 컨텍스트 및 객체 접근을 시도하여 원격 코드 실행의 가능 여부를 판별하기 위하여 페이로드 입력 및 실행 유무 확인</li>
+</ol>
+<h4 id="_27">심화 공격 수행</h4>
+<h4 id="_28">조치 방법</h4>
+<ol>
+<li>템플릿 언어에서 예약된 의미를 가지는 문자({ } &lt; &gt; % # @ 등)에 대하여 이스케이프 처리</li>
+<li>템플릿 엔진의 안전 모드를 사용함으로써 템플릿 내에서 실행할 수 있는 명령을 제한하여 임의 코드 실행 방지</li>
+<li>안전 모드 및 내장 함수를 활용하여 보안 조치를 하는 경우 엔진의 버전과 그 버전에서 지원하는 기능을 고려하여 적절한 보안 패치 진행</li>
+<li>에러 메시지를 통해 사용된 템플릿 언어 및 관련 취약점에 대한 유의미한 정보를 제공할 가능성이 존재하므로, 노출되는 에러 메시지를 제한</li>
+<li>템플릿 엔진 내 사용되는 특수문자를 필터링하도록 웹 방화벽 룰셋 적용</li>
+</ol>
+<h4 id="_29">조치 예</h4>
+<p>언어별 사용자 입력값 특수문자 인코딩 처리 예시</p>
+<h5 id="java">Java</h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">commons</span><span class="p">.</span><span class="na">text</span><span class="p">.</span><span class="na">StringEscapeUtils</span><span class="p">.</span><span class="na">escapeHtml4</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"> </span><span class="c1">// 사용자 입력값 인코딩</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">// 사용자 입력값 이스케이프 처리</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">escapeSpecialCharacters</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&quot;([*{}\\[\\]&lt;&gt;%#@])&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\\\\$1&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</code></pre></div>
+<h5 id="java-velocity">Java Velocity</h5>
+<p>Velocity 사용시 템플릿 엔진에서 제공하는 '$esc.html'를 사용하여 사용자 입력을 HTML 인코딩 처리
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>#set($userInput = $esc.html($params.get(&quot;userInput&quot;)))
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>&lt;p&gt;사용자 입력: $userInput&lt;/p&gt;
+</code></pre></div></p>
+<h5 id="java-freemarker">Java FreeMarker</h5>
+<p>FreeMarker 템플릿 엔진의 내장 함수인 '?html'를 사용하여 사용자 입력을 HTML 인코딩 처리
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&lt;p&gt;사용자 입력: ${userInput?html}!&lt;/p&gt;
+</code></pre></div></p>
+<h5 id="aspnet">ASP.NET</h5>
+<p>사용자 입력값 특수문자 인코딩 처리 예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>//<span class="w"> </span>사용자<span class="w"> </span>입력값<span class="w"> </span>인코딩
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>...
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>private<span class="w"> </span>static<span class="w"> </span>readonly<span class="w"> </span>Dictionary<span class="nt">&lt;char</span><span class="err">,</span><span class="w"> </span><span class="err">string</span><span class="nt">&gt;</span><span class="w"> </span>HtmlEntities<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Dictionary<span class="nt">&lt;char</span><span class="err">,</span><span class="w"> </span><span class="err">string</span><span class="nt">&gt;</span><span class="w"> </span>{
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span>{<span class="w"> </span>&#39;*&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#42;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span>{<span class="w"> </span>&#39;{&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#123;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span>{<span class="w"> </span>&#39;}&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#125;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span>{<span class="w"> </span>&#39;[&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#91;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span>{<span class="w"> </span>&#39;]&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#93;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span>{<span class="w"> </span>&#39;<span class="err">&lt;</span>&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;lt;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span>{<span class="w"> </span>&#39;&gt;&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;gt;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span>{<span class="w"> </span>&#39;%&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#37;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span>{<span class="w"> </span>&#39;#&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#35;</span>&quot;<span class="w"> </span>},
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span>{<span class="w"> </span>&#39;@&#39;,<span class="w"> </span>&quot;<span class="ni">&amp;#64;</span>&quot;<span class="w"> </span>}
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>};
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>public<span class="w"> </span>static<span class="w"> </span>string<span class="w"> </span>EscapeHtmlEntities(string<span class="w"> </span>input)<span class="w"> </span>{
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span>if<span class="w"> </span>(input<span class="w"> </span>==<span class="w"> </span>null)<span class="w"> </span>return<span class="w"> </span>null;
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">    </span>StringBuilder<span class="w"> </span>escapedString<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>StringBuilder();
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span>foreach<span class="w"> </span>(char<span class="w"> </span>ch<span class="w"> </span>in<span class="w"> </span>input)<span class="w"> </span>{
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">        </span>if<span class="w"> </span>(HtmlEntities.ContainsKey(ch))<span class="w"> </span>{
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">            </span>escapedString.Append(HtmlEntities[ch]);
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">    </span>}<span class="w"> </span>else<span class="w"> </span>{
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">      </span>escapedString.Append(ch);
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">    </span>}
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">    </span>}
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">    </span>return<span class="w"> </span>escapedString.ToString();
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">    </span>}
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">    </span>...
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">    </span>//<span class="w"> </span>사용자<span class="w"> </span>입력값<span class="w"> </span>이스케이프<span class="w"> </span>처리
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">    </span>public<span class="w"> </span>static<span class="w"> </span>string<span class="w"> </span>EscapeSpecialCharacters(string<span class="w"> </span>input)<span class="w"> </span>{
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">    </span>if<span class="w"> </span>(input<span class="w"> </span>==<span class="w"> </span>null)<span class="w"> </span>return<span class="w"> </span>null;
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">    </span>return<span class="w"> </span>Regex.Replace(input,<span class="w"> </span>@&quot;([*{}\[\]<span class="err">&lt;</span>&gt;%#@])&quot;,<span class="w"> </span>@&quot;\$1&quot;);
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>}
+</code></pre></div></p>
+<h5 id="python">python</h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 사용자 입력값 인코딩</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">escape_html_entities</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">if</span> <span class="n">input_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">html_entities</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#42;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="s1">&#39;{&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#123;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        <span class="s1">&#39;}&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#125;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        <span class="s1">&#39;[&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#91;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="s1">&#39;]&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#93;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>        <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;lt;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>        <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;gt;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>        <span class="s1">&#39;%&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#37;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>        <span class="s1">&#39;#&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#35;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>        <span class="s1">&#39;@&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;#64;&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="p">}</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">html_entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">input_string</span><span class="p">)</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="c1"># 사용자 입력값 이스케이프 처리</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">escape_special_characters</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    <span class="k">if</span> <span class="n">input_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>        <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([*</span><span class="si">{}</span><span class="s1">\[\]&lt;&gt;%#@])&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">\1&#39;</span><span class="p">,</span> <span class="n">input_string</span><span class="p">)</span>
+</code></pre></div>
+<h5 id="python-jinja2">python (jinja2)</h5>
+<p>사용자 입력을 직접 템플릿에 삽입하는 방식은 SSTI 취약점에 노출될 수 있으므로 사용자 입력을 템플릿 변수로 전달하는 방식을 사용하여 안전하게 처리
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;userinput : {{ userinput }}&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">return</span> <span class="n">render_template_string</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">userinput</span><span class="o">=</span><span class="n">param</span><span class="p">)</span>
+</code></pre></div></p>
+<h5 id="php">PHP</h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="x">function escape_html_entities($input_string) {</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="x">    if ($input_string === null) {</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="x">        return null;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="x">    }</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="x">    $html_entities = [</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="x">    &#39;*&#39; =&gt; &#39;&amp;#42;&#39;,</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="x">    &#39;{&#39; =&gt; &#39;&amp;#123;&#39;,</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="x">    &#39;}&#39; =&gt; &#39;&amp;#125;&#39;,</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="x">    &#39;[&#39; =&gt; &#39;&amp;#91;&#39;,</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="x">    &#39;&lt;&#39; =&gt; &#39;&amp;lt;&#39;,</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="x">    &#39;&gt;&#39; =&gt; &#39;&amp;gt;&#39;,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="x">    &#39;%&#39; =&gt; &#39;&amp;#37;&#39;,</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="x">    ];</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="x">    return strtr($input_string, $html_entities);</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="x">}</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="x">// 특수 문자 앞에 백슬래시를 추가하여 이스케이프 처리</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="x">function escape_special_characters($input_string) {</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="x">    if ($input_string === null) {</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="x">        return null;</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="x">    }</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="x">    return preg_replace(&#39;/([*{}\[\]&lt;&gt;%#@])/&#39;, &#39;\\\\$1&#39;, $input_string);</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="x">}</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="x">// htmlspecialchars 함수를 이용하여 사용자 입력값을 HTML 인코딩</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="x">$userInput = htmlspecialchars($userInput ENT_QUOTES, &#39;UTF-8&#39;);</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
