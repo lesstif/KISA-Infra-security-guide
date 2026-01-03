@@ -25,11 +25,8 @@
 - [FD: 15. 파일 다운로드](general/15-fd.md)
 - [IS: 16. 불충분한 세션 관리](general/16-is.md)
 - [SN: 17. 데이터 평문 전송](general/17-sn.md)
+- [CT: 18. 쿠키 변조](general/18-ct.md)
 - [AE: 19. 관리자페이지 노출](general/19-ae.md)
+- [AA: 20. 자동화 공격](general/20-aa.md)
 - [WM: 21. 불필요한 Method 악용](general/21-wm.md)
-
-## Web Application(웹)
-
-- [CC-1: 쿠키 변조](web_app/cc-1.md)
-- [CC-2: 자동화 공격](web_app/cc-2.md)
 
